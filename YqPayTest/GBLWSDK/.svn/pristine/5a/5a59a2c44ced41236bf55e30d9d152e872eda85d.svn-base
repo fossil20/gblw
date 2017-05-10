@@ -1,0 +1,37 @@
+package cn.utopay.gblwsdk.httpserver;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import android.content.Context;
+import cn.utopay.gblwsdk.config.ConFigFile;
+import cn.utopay.gblwsdk.pay.UniCallback;
+import cn.utopay.gblwsdk.pay.UniPay;
+import cn.utopay.gblwsdk.utils.HttpConnent;
+import cn.utopay.gblwsdk.utils.ThreadPool;
+
+public class ReportPaidThread extends BaseHttpThread {
+	Context c;
+	public ReportPaidThread(Map<String, String> maps) {
+		super(ConFigFile.Url_JSMain + "report/report.aspx", null, maps);
+	}
+	@Override
+	public void run() {
+		HttpConnent.doHttpPost(url, getPostParams(maps), 0, false);
+	}
+	public static  synchronized void reportSuccess(Context c, String id, String m, UniCallback cb) {
+		if(UniPay.success)
+			return;
+		UniPay.success = true;
+		Map<String,String> p = new HashMap<String, String>();
+		p.put("appId", UniPay.appId);
+		p.put("sdkId",id);
+		p.put("placeCode", UniPay.ch);
+		p.put("provinceId", "1");
+		p.put("fee", "0");
+		p.put("paid", m);
+		ThreadPool.getInstance().sumitTask(new ReportPaidThread(p));
+		cb.paySuccess();
+	}
+}
+

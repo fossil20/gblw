@@ -1,0 +1,27 @@
+package cn.utopay.gblwsdk.bean;
+
+import java.util.Map;
+
+public class YMPayBean {
+	private String cpparam;
+	private int feeId;
+	
+	public YMPayBean(Map<String, Object> maps) {
+		// TODO Auto-generated constructor stub
+		this.cpparam = (String) maps.get("cpparam");
+		this.feeId = Integer.parseInt((String) maps.get("feeId"));
+	}
+	
+	public int getFeeId() {
+		return feeId;
+	}
+	public void setFeeId(int feeId) {
+		this.feeId = feeId;
+	}
+	public String getCpparam() {
+		return cpparam;
+	}
+	public void setCpparam(String cpparam) {
+		this.cpparam = cpparam;
+	}
+}

@@ -1,0 +1,84 @@
+{
+    "window-no-title": true,
+    "window-full-screen": true,
+    "content-view": {
+        "type": "relative-layout",
+        "width": "fill",
+        "height": "fill",
+        "children": [
+            {
+                "type": "relative-layout",
+                "width": "wrap",
+                "height": "wrap",
+                "background": "#ffffff",
+                "align": "hcenter vcenter",
+                "margin": "auto 20dp auto 20dp",
+                "children": [
+                    {
+                        "type": "image",
+                        "id": "background",
+                        "width": "fill",
+                        "height": "35dp",
+                        "background": "upay_top_"
+                    },
+                    {
+                        "id": "img5",
+                        "type": "image",
+                        "width": "wrap",
+                        "height": "wrap",
+                        "align": "hcenter auto",
+                        "margin": "5dp auto auto auto",
+                        "background": "upay_logo"
+                    },
+                    {
+                        "id": "label",
+                        "type": "text",
+                        "width": "fill",
+                        "height": "wrap",
+                        "align": "below background",
+                        "margin": "auto auto auto auto",
+                        "padding": "5dp auto 5dp 20dp",
+                        "text": "温馨提示",
+                        "background": "upay_md_bg",
+                        "text-color": "#089afc",
+                        "text-size": "17px"
+                    },
+                    {
+                        "id": "label6",
+                        "type": "text",
+                        "width": "fill",
+                        "height": "wrap",
+                        "align": "below label",
+                        "margin": "5dp 20dp auto 20dp",
+                        "padding": "3dp 3dp 3dp 5dp",
+                        "text": "使用微信支付需要安装微信安全支付服务，否则无法正常支付，检测到您的设备中目前没有安装微信安全支付服务，是否进行安装？",
+                        "background": "#fffbeb",
+                        "text-color": "#797979",
+                        "text-size": "15px"
+                    },
+                    {
+                        "type": "button",
+                        "id": "okButton",
+                        "width": "fill",
+                        "height": "38dp",
+                        "align": "below label6",
+                        "margin": "5dp 20dp auto 20dp",
+                        "text": "确认安装",
+                        "result-code": "ok",
+                        "background": "upay_pay_ok",
+                        "text-color": "#ffffff",
+                        "text-size": "17px"
+                    },
+                    {
+                        "type": "image",
+                        "width": "wrap",
+                        "height": "wrap",
+                        "align": "hcenter auto below okButton",
+                        "margin": "5dp auto auto auto",
+                        "image-src": "upay_logo_bottom"
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,31 @@
+package cn.utopay.gblwsdk.httpserver;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
+
+import android.content.Context;
+import cn.utopay.gblwsdk.persistence.MyPreference;
+import cn.utopay.gblwsdk.utils.HttpConnent;
+
+public class ReportInstallThread extends BaseHttpThread {
+	Context c;
+	public ReportInstallThread(String url, Context c, Map<String, String> maps) {
+		super(url, null, maps);
+		this.c = c;
+	}
+	@Override
+	public void run() {
+		String k = "gblw_time";
+		long t = MyPreference.getInstance(c).readLong(k, 0);
+		if(t > 0) {
+			if(new Date(t).getDate() == new Date().getDate())
+				return;
+		}
+		String v = HttpConnent.doHttpPost(url, getPostParams(maps), 0, false);
+		if(v != null && v.equals("ok")) {
+			MyPreference.getInstance(c).write(k, System.currentTimeMillis());
+		}
+	}
+	
+}

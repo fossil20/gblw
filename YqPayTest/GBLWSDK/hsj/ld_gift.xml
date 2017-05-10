@@ -1,0 +1,31 @@
+﻿<?xml version="1.0"?>
+	<Test1 Typeid="1" test1="仅需花费" color1="188" color2="188" color3="188" size="20"/>
+
+	<price>
+	<Item gift_id="100" cost=""	  color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="101" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="102" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="103" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="104" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="105" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="106" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="107" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="108" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="109" cost="10"  color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="110" cost="6"  color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="111" cost="6"  color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="112" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="113" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="114" cost="6"  color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="115" cost="8"  color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="116" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="117" cost="10" color11="188" color12="188" color13="188" size="23"/>
+	<Item gift_id="118" cost="6"color11="188" color12="188" color13="188" size="23"/>
+	</price>
+
+	<Test2 id="2" test2="元,点击确定按钮产生扣费,信息费由合作方代收.客服电话0512-66897831" color21="188"   color22="188" color23="188" size="20"/>
+	<Pos>
+	<position posID="1" pos1="-459" pos2="-222" />
+	<position posID="2" pos1="-246" pos2="-220" />
+	<position posID="3" pos1="170" pos2="-222" />
+	</Pos>

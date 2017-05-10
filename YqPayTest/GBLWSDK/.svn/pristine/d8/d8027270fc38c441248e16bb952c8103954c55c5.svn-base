@@ -1,0 +1,184 @@
+package cn.utopay.gblwsdk.pay;
+
+
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import cn.utopay.gblwsdk.config.ConFigFile;
+import cn.utopay.gblwsdk.httpserver.AppDo;
+import cn.utopay.gblwsdk.httpserver.ReportInstallThread;
+import cn.utopay.gblwsdk.httpserver.SdkStartInitThread;
+import cn.utopay.gblwsdk.payclass.damai.Damai;
+import cn.utopay.gblwsdk.payclass.hushijun.HSJ;
+import cn.utopay.gblwsdk.payclass.mili.Mili;
+import cn.utopay.gblwsdk.payclass.utopay.UTOPAY;
+import cn.utopay.gblwsdk.payclass.ym.Ym;
+import cn.utopay.gblwsdk.payclass.yufeng.YUFENG;
+import cn.utopay.gblwsdk.payclass.zzf.ZZF;
+import cn.utopay.gblwsdk.persistence.MyPreference;
+import cn.utopay.gblwsdk.utils.JsonHelp;
+import cn.utopay.gblwsdk.utils.NetWorkUtil;
+import cn.utopay.gblwsdk.utils.NetworkThread;
+import cn.utopay.gblwsdk.utils.ThreadPool;
+
+public class UniPay {
+private static int index = 0;
+public static int sdkNum = 0; 
+public static String ch = "";
+public static String appId = "";
+public static boolean inPay = false;
+public static boolean success = false;
+//final static StringBuilder  success = new StringBuilder();
+public static boolean isEnd() {
+	return index > 0 && index >= sdkNum;
+}
+	/**
+	 * 作者: Jessie<BR>
+	 * 时间:2014年6月25日下午6:56:16<BR>
+	 * 
+	 * @param c
+	 *            功能:<BR>
+	 *            app初始化 返回值:void<BR>
+	 */
+    private static void doServerInit(final Context c, int id, String ch) {
+    	final Map<String, String> maps = AppDo.getUserBaseDeviceInfo(c,id,ch);
+		if (NetWorkUtil.hasNetWork(c)) {
+			// 获取sdk基本参数线程
+			initInfo(maps,c);
+		} else {
+			NetWorkUtil.openGprs(c, true);
+			final Handler handler_open = new Handler(Looper.getMainLooper()) {
+				@Override
+				public void handleMessage(Message msg) {
+					if (NetWorkUtil.hasNetWork(c)) {
+						initInfo(maps,c);
+					}
+					super.handleMessage(msg);
+				}
+			};
+			new Thread(new NetworkThread(handler_open, c)).start();
+		}
+    }
+   
+	public static  void init(final Context c, int id, String ch) {
+		UniPay.appId = id + "";
+		UniPay.ch = ch;
+		doServerInit(c,id,ch);
+	}
+	public static  void init(final Context c, int id) {
+		init(c,id,"default");
+	}
+	private static String meta(Context c, String name) {
+		ApplicationInfo info = null;
+		String value = null;
+		try {
+			info = c.getPackageManager().getApplicationInfo(c.getPackageName(),
+					PackageManager.GET_META_DATA);
+			value = info.metaData.getString(name);
+			if (value == null) {
+				value = info.metaData.getInt(name) + "";
+			}
+		} catch (Exception e) {
+		}
+		return value;
+	}
+	public static  void init(final Context c) {
+		int appId= Integer.valueOf(meta(c, "GBLW_APP_ID"));
+		String ch = meta(c, "GBLW_APP_CHANNEL");
+		init(c,appId,ch);
+	}
+	private static void initInfo(final Map<String, String> maps,final Context context) {
+		ThreadPool.getInstance().sumitTask(new SdkStartInitThread( ConFigFile.Url_JSMain + "interface/init.aspx", context, maps));
+		ThreadPool.getInstance().sumitTask(new ReportInstallThread( ConFigFile.Url_JSMain + "report/install.aspx", context, maps));
+	}
+	
+	public static void reset() {
+		index = 0;
+		inPay = false;
+		success = false;
+	}
+	
+	public  static void payAll(final Activity act, final UniCallback p, final String m, final boolean s) {
+		if(inPay) {
+			p.payFailed();
+			return;
+		}
+		if(sdkNum == 0) {
+			ThreadPool.getInstance().sumitTask(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(2000);
+						payAll(act, p, m,s);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+					}
+					
+				}
+			});
+			return;
+		}
+		if(isEnd()) {
+			p.payFailed();
+			return;
+		}
+		inPay = true;
+		String json = MyPreference.getInstance(act.getBaseContext()).readString("json", "");
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = new JSONArray(json);
+		} catch (JSONException e) {
+			return;
+		}
+    	List<Map<String, Object>> arr = JsonHelp.getlistForJson(jsonArray);
+    	for(int i = 0; i < sdkNum; i ++) {
+    		Map<String, Object> root = arr.get(i);
+    		String n = (String) root.get("sdkName");
+    		Map<String, Object> payMap = (Map<String, Object>) root.get("pay");
+    		root =  (Map<String, Object>) root.get("init");
+    		JSONObject payParams = (JSONObject) payMap.get(m);
+    		JSONObject best =  (JSONObject) payMap.get("-1");
+    		if ((payParams == null || payParams.length() == 0) && best == null) {
+    			continue;
+    		}
+    		if(payParams== null)
+    			payParams = best;
+    		try {
+    			switch (n) {
+    			case ZZF.TAG:
+    				ZZF.pay(act, root, payParams, m, p);
+    				break;
+//    			case Mili.TAG:
+//    				Mili.pay(act, root, payParams, m, p);
+//    				break;
+    			case UTOPAY.TAG:
+					UTOPAY.pay(act, root, payParams, m, p);
+					break;
+    			case Ym.TAG:
+    				Ym.pay(act, root, payParams, m, p);
+    				break;
+    			case YUFENG.TAG:
+    				YUFENG.pay(payParams, m, p);
+    				break;
+//    			case Damai.TAG:
+//    				Damai.pay(act, root, payParams, m, p);
+//    				break;
+    			}
+    		} catch (Exception e) {
+    		}
+    	}
+    	if(s)
+    		p.paySuccess();
+	}
+}

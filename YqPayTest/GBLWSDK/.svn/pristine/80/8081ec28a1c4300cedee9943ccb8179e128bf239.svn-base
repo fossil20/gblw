@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<plugins><plugin name="com.u8.sdk.ERUser" type="1" /><plugin name="com.u8.sdk.ERPay" type="2" /><plugin name="com.u8.sdk.UMAnalytics" type="5" /></plugins>

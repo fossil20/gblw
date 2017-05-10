@@ -1,0 +1,90 @@
+package cn.utopay.gblwsdk.persistence;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+/**
+ * class name:MyPreference<BR>
+ * class description:用来存取简单数据的类<BR>
+ * PS： <BR>
+ * 
+ * @version 1.00 2012-4-11
+ * @author ZHENSHI)peijiangping
+ */
+public class MyPreference {
+
+	private static SharedPreferences preference = null;
+	private static MyPreference instance = new MyPreference(); 
+	 private MyPreference (){}
+	 public static MyPreference getInstance(Context context) {  
+		 if (preference == null) {
+				preference = PreferenceManager.getDefaultSharedPreferences(context);
+			}
+	     return instance;  
+	 }
+	
+//	public MyPreference(Context context) {
+//		if (preference == null) {
+//			preference = PreferenceManager.getDefaultSharedPreferences(context);
+//		}
+//	}
+
+	public int readInt(String name, int defultint) {
+		return preference.getInt(name, defultint);
+	}
+	public float readFloat(String name, float defultFloat) {
+		return preference.getFloat(name, defultFloat);
+	}
+
+	public String readString(String name, String defultString) {
+		return preference.getString(name, defultString);
+	}
+	
+	public Boolean readBoolean(String name, Boolean defaultBoolean) {
+		return preference.getBoolean(name, defaultBoolean);
+	}
+
+	public boolean readBoolean(String name, boolean defultint) {
+		return preference.getBoolean(name, defultint);
+	}
+
+	public void write(String name, int value) {
+		SharedPreferences.Editor editor = preference.edit();
+		editor.putInt(name, value);
+		editor.commit();
+	}
+	
+	public void write(String name, float value) {
+		SharedPreferences.Editor editor = preference.edit();
+		editor.putFloat(name, value);
+		editor.commit();
+	}
+
+	public long readLong(String name, long defultint) {
+		return preference.getLong(name, defultint);
+	}
+
+	public void write(String name, long value) {
+		SharedPreferences.Editor editor = preference.edit();
+		editor.putLong(name, value);
+		editor.commit();
+	}
+
+	public void write(String name, String value) {
+		SharedPreferences.Editor editor = preference.edit();
+		editor.putString(name, value);
+		editor.commit();
+	}
+
+	public void write(String name, boolean value) {
+		SharedPreferences.Editor editor = preference.edit();
+		editor.putBoolean(name, value);
+		editor.commit();
+	}
+	public void cleanAll() {
+		SharedPreferences.Editor editor = preference.edit();
+		editor.clear();
+		editor.commit();
+	}
+}

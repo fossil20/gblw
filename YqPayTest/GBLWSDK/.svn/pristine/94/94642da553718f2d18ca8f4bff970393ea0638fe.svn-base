@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<goods>
+    <!-- productID:游戏中商品固定ID -->
+    <!-- payCode:计费点别名 -->
+    <good productID="1" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>
+    <good productID="2" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>   
+    <good productID="3" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>
+    <good productID="4" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>      
+    <good productID="5" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>
+    <good productID="6" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>   
+    <good productID="7" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>
+    <good productID="8" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>      
+    <good productID="9" priciePointId="10143" money="600"  priciePointName="护盾"/>
+    <good productID="10" priciePointId="10143" money="600"  priciePointName="护盾"/>   
+    <good productID="11" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>
+    <good productID="12" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>      
+    <good productID="13" priciePointId="10146" money="600"  priciePointName="金币礼包1"/>
+    <good productID="14" priciePointId="10147" money="800"  priciePointName="金币礼包2"/>   
+    <good productID="15" priciePointId="10148" money="1000"  priciePointName="金币礼包3"/>
+    <good productID="16" priciePointId="10135" money="1000"  priciePointName="登陆奖励"/>      
+    
+</goods>

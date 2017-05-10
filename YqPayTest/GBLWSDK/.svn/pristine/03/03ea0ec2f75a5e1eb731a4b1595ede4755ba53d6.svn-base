@@ -1,0 +1,46 @@
+package cn.utopay.gblwsdk.payclass.ym;
+
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import cn.utopay.gblwsdk.httpserver.ReportPaidThread;
+import cn.utopay.gblwsdk.pay.UniCallback;
+import cn.utopay.gblwsdk.utils.LogUtil;
+import cn.utopay.gblwsdk.utils.ThreadPool;
+
+import com.android.yimeng.ympay.in.BupPayCalBackListener;
+
+import d.e.f.t.hr.Yent;
+
+public class Ym {
+	public static final String TAG = "小美支付";
+	public static final String id = "11";
+
+	public static void init(final Activity t) {
+		Yent.getInstance(t).init(t);
+	}
+
+	public static void pay(final Activity act, Map<String, Object> root, JSONObject pay, final String m, final UniCallback cb) throws Exception {
+		final int feeId = Integer.valueOf((String) pay.get("feeId"));
+		final String mm = pay.getString("money");
+		ThreadPool.getInstance().sumitTask(new Runnable() {
+			@Override
+			public void run() {
+				Yent.getInstance(act).pay(feeId, "", act, new BupPayCalBackListener() {
+					@Override
+					public void success(int c) {
+						LogUtil.v(TAG + ":" + c);
+						ReportPaidThread.reportSuccess(act,TAG,mm,cb);
+					}
+					@Override
+					public void fail(int c) {
+						LogUtil.v(TAG + ":failed_" + c);
+					}
+				});
+			}
+		});
+	}
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_gravity="center" android:paddingLeft="20.0dip" android:paddingRight="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:id="@id/relativeLayout_top" android:background="@drawable/upay_top_" android:layout_width="fill_parent" android:layout_height="40.0dip">
+            <ImageView android:id="@id/imageView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/upay_logo" android:layout_centerInParent="true" />
+            <ImageButton android:id="@id/imagebutton_backout" android:background="@drawable/upay_backout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="14.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <RelativeLayout android:id="@id/relativeLayout_md" android:background="@drawable/upay_md_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/relativeLayout_top" android:layout_alignParentLeft="true">
+            <TextView android:id="@id/textView_md" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <RelativeLayout android:id="@id/show_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/relativeLayout_md">
+            <TableLayout android:id="@id/tableLayout1" android:paddingLeft="15.0dip" android:paddingTop="5.0dip" android:paddingRight="15.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TableRow android:background="@drawable/upay_shape_top_corner_no_bottom_line" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <ImageView android:id="@id/imageView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/upay_payment" />
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/textView_amount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" />
+                    <RelativeLayout android:layout_gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <TextView android:id="@id/commodity_amount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_alignParentLeft="true" android:layout_centerInParent="true" />
+                    </RelativeLayout>
+                </TableRow>
+                <TableRow android:id="@id/card_type_row" android:background="@drawable/upay_shape_bottom_corner_no_center_line" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <ImageView android:id="@id/imageView3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/upay_card_type" />
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/textView_card_type" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" />
+                    <RelativeLayout android:layout_gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="5.0">
+                        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/upay_arrow_bg" android:layout_alignParentRight="true" android:layout_centerInParent="true" />
+                    </RelativeLayout>
+                </TableRow>
+                <TableRow android:id="@id/card_value_row" android:background="@drawable/upay_shape_bottom_corner_no_top_line" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <ImageView android:id="@id/imageView4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/upay_card_value" />
+                    <TextView android:layout_gravity="center_vertical" android:id="@id/textView_card_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" />
+                    <RelativeLayout android:layout_gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="5.0">
+                        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/upay_arrow_bg" android:layout_alignParentRight="true" android:layout_centerInParent="true" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+            <RelativeLayout android:id="@id/linearLayout_pay_toast" android:paddingLeft="15.0dip" android:paddingRight="15.0dip" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/tableLayout1">
+                <EditText android:id="@id/editText_number" android:background="@drawable/upay_edit_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" android:numeric="integer" />
+                <EditText android:id="@id/editText_pw" android:background="@drawable/upay_edit_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="5.0dip" android:numeric="integer" android:layout_below="@id/editText_number" />
+            </RelativeLayout>
+            <Button android:textSize="20.0dip" android:textColor="#ffffffff" android:id="@id/pay_ok" android:background="@drawable/upay_pay_ok" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginTop="5.0dip" android:layout_marginRight="15.0dip" android:text="确认支付" android:layout_below="@id/linearLayout_pay_toast" />
+        </RelativeLayout>
+        <ImageView android:id="@id/imageView5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginTop="7.0dip" android:src="@drawable/upay_secretary" android:layout_below="@id/show_view" />
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_below="@id/imageView5">
+            <ImageView android:id="@id/imageView6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/upay_logo_bottom" android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

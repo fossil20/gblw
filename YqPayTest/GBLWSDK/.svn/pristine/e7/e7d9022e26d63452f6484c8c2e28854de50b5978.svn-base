@@ -1,0 +1,18 @@
+package cn.utopay.gblwsdk.utils;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+public class ThreadPool {
+	private static ThreadPool instance = null;
+	private Executor pool = Executors.newCachedThreadPool();
+	public static ThreadPool getInstance() {
+		if(instance == null) {
+			instance = new ThreadPool();
+		}
+		return instance; 
+	}
+	public  void sumitTask(Runnable task) {
+		pool.execute(task);
+	}
+}

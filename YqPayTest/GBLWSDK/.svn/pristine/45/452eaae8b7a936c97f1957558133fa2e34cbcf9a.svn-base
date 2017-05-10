@@ -1,0 +1,6 @@
+package cn.utopay.gblwsdk.pay;
+
+public interface UniCallback {
+	 void paySuccess();
+	 void payFailed();
+}

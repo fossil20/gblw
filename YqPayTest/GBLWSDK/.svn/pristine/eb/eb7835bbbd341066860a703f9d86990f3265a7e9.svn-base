@@ -1,0 +1,46 @@
+package cn.utopay.gblwsdk.payclass.yufeng;
+
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.os.Bundle;
+import cn.utopay.gblwsdk.httpserver.ReportPaidThread;
+import cn.utopay.gblwsdk.pay.UniCallback;
+import cn.utopay.gblwsdk.pay.UniPay;
+import cn.utopay.gblwsdk.utils.LogUtil;
+
+import com.mj.jar.pay.BillingListener;
+import com.mj.jar.pay.MjPaySDK;
+
+public class YUFENG {
+	public static final String TAG = "玉峰";
+	public static final String id = "13";
+	private static MjPaySDK  sdk = null;
+	static UniCallback cb = null;
+	static String m = "";
+	public static void init(final Activity t,final String appId ) {
+		if(sdk != null)
+			return;
+		t.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				sdk = new MjPaySDK(t,new BillingListener() {
+					@Override
+					public void onInitResult(int arg0) {}
+					@Override
+					public void onBillingResult(int i, Bundle b) {
+						LogUtil.v(TAG+ ":" + i);
+						if(i == 2000) {
+							ReportPaidThread.reportSuccess(t, id, m, cb);
+						}
+					}
+				} , appId, "", UniPay.ch);
+			}
+		});
+	}
+	public static void pay(JSONObject pay, final String m, final UniCallback cb) throws Exception {
+		YUFENG.m = pay.getString("money");
+		YUFENG.cb = cb;
+		sdk.pay(UniPay.ch + System.nanoTime(), pay.getString("payCode"), m + "00");
+	}
+}

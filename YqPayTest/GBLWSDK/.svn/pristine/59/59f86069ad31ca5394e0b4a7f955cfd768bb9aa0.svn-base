@@ -1,0 +1,102 @@
+package cn.utopay.gblwsdk.httpserver;
+
+
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import android.app.Activity;
+import android.content.Context;
+import cn.utopay.gblwsdk.pay.UniPay;
+import cn.utopay.gblwsdk.payclass.damai.Damai;
+import cn.utopay.gblwsdk.payclass.utopay.UTOPAY;
+import cn.utopay.gblwsdk.payclass.ym.Ym;
+import cn.utopay.gblwsdk.payclass.yufeng.YUFENG;
+import cn.utopay.gblwsdk.payclass.zzf.ZZF;
+import cn.utopay.gblwsdk.persistence.MyPreference;
+import cn.utopay.gblwsdk.utils.HttpConnent;
+import cn.utopay.gblwsdk.utils.JsonHelp;
+
+
+
+
+public class SdkStartInitThread extends BaseHttpThread {
+	private Context c;
+	public SdkStartInitThread(String url, Context c,
+			Map<String, String> maps) {
+		super(url, null, maps);
+		this.c = c;
+		
+	}
+
+	@Override
+	public void run() {
+		String value = HttpConnent.doHttpPost(url, getPostParams(maps), 0, true);
+		// 获取省份,保存
+		Activity t = (Activity)c;
+		try {
+			if (value != null) {
+				JSONArray obj = new JSONArray(value);
+				if (obj.length() > 0) {
+					MyPreference.getInstance(this.c).write("json", value);
+					initSDK(t, obj);
+				}else{
+					initSDK(t, loadLocalJson());
+				}
+			} else {
+				initSDK(t, loadLocalJson());
+			}
+		} catch (JSONException e) {
+			initSDK(t, loadLocalJson());
+		}
+//		LogUtil.v(getFullUrl(url, maps));
+//		LogUtil.v(value + "-----");
+	}
+	private JSONArray loadLocalJson(){
+		String json = JsonHelp.getJson(this.c, "gblw.json");
+		MyPreference.getInstance(this.c).write("json", json);
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = new JSONArray(json);
+		} catch (JSONException e) {
+		}
+		return jsonArray;
+	}
+	 private  void initSDK(final Activity t, JSONArray jsonArray){
+	    	List<Map<String, Object>> sdkArray = JsonHelp.getlistForJson(jsonArray);
+	    	UniPay.sdkNum = sdkArray.size();
+//	    	if(UniPay.sdkNum == 0) {
+//	    		initSDK(t, loadLocalJson());
+//	    		return;
+//	    	}
+	    	for (Map<String, Object> sdkmap : sdkArray) {
+				String sdkName = (String) sdkmap.get("sdkName");
+				Map<String, Object>map = (Map<String, Object>) sdkmap.get("init");
+				switch (sdkName) {
+				case ZZF.TAG:
+					ZZF.init(t, map.get("channelId").toString(), map.get("appId").toString(), map.get("qd").toString());
+					break;
+				case UTOPAY.TAG:
+					UTOPAY.init(t,map.get("appId").toString());
+					break;
+//				case Mili.TAG:
+//					Mili.init(t);
+//					break;
+				case Ym.TAG:
+					Ym.init(t);
+					break;
+				case YUFENG.TAG:
+					YUFENG.init(t, map.get("appId").toString());
+					break;
+//				case Damai.TAG:
+//					Damai.init(t, map.get("msa").toString());
+//					break;
+				default:
+					break;
+				}
+				
+			}
+	    }
+}

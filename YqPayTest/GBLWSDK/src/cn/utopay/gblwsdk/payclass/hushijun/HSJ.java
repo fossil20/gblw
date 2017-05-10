@@ -1,0 +1,88 @@
+package cn.utopay.gblwsdk.payclass.hushijun;
+
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import android.app.Activity;
+import cn.utopay.gblwsdk.pay.UniCallback;
+
+
+public class HSJ {
+	public static final String TAG = "乐动时代";
+//	public static void init(final Activity activity) {}
+//	public static void pay(final Activity act, Map<String, Object> root, final JSONObject pay, final String m, final UniCallback cb) throws Exception {}
+//	public static final String id = "9";
+//	public static void init(final Activity activity) {
+//		activity.runOnUiThread(new Runnable() {
+//			@Override
+//			public void run() {
+//				U8SDK.getInstance().init(activity);
+//				U8SDK.getInstance().onCreate();
+//			}
+//		});
+//	}
+//	public static void pay(final Activity act, Map<String, Object> root, final JSONObject pay, final String m, final UniCallback cb) throws Exception {
+//		final String pid = pay.getString("productId");
+//		final String mm = pay.getString("money");
+//		U8SDK.getInstance().runOnMainThread(new Runnable() {
+//			@Override
+//			public void run() {
+//				PayParams params = new PayParams();
+//				params.setProductId(pid);
+//				params.setPrice(Integer.valueOf(m));
+//				U8SDK.getInstance().setSDKListener(new IU8SDKListener() {
+//					@Override
+//					public void onResult(final int code, final String msg) {
+//						Log.e("GBLWPAY", "hsj code:" +code +":, msg:" + msg);
+//						switch (code) {
+//						case U8Code.CODE_PAY_SUCCESS:
+//							ReportPaidThread.report(act, id, mm);// 报告服务器必须要真实信息费
+//							cb.paySuccess();
+//							break;
+//						default:
+//							Unipay.pay(act, cb, m);
+//							break;
+//						}
+//					}
+//					@Override
+//					public void onAuthResult(UToken arg0) {
+//
+//					}
+//
+//					@Override
+//					public void onInitResult(InitResult arg0) {
+//
+//					}
+//
+//					@Override
+//					public void onLoginResult(String arg0) {
+//
+//					}
+//
+//					@Override
+//					public void onLogout() {
+//
+//					}
+//
+//					@Override
+//					public void onPayResult(PayResult arg0) {
+//
+//					}
+//
+//					@Override
+//					public void onSwitchAccount() {
+//
+//					}
+//
+//					@Override
+//					public void onSwitchAccount(String arg0) {
+//
+//					}
+//				});
+//				U8Pay.getInstance().pay(params);
+//			}
+//		});
+//
+//	}
+}

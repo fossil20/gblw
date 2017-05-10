@@ -1,0 +1,44 @@
+package cn.utopay.gblwsdk.payclass.damai;
+
+//import java.util.Map;
+//
+//import org.json.JSONObject;
+//
+//import com.android.mtools.MPay;
+//import com.android.mtools.MPayListener;
+//
+//import android.app.Activity;
+//import cn.utopay.gblwsdk.httpserver.ReportPaidThread;
+//import cn.utopay.gblwsdk.pay.UniCallback;
+//import cn.utopay.gblwsdk.pay.UniPay;
+//import cn.utopay.sdk.pay.YQPay;
+
+public class Damai {
+//	public static final String TAG = "大麦支付";
+//	public static final String id = "14";
+//	private static MPay mpay = null;
+//	public static void init(final Activity t, final String msa) {
+//		t.runOnUiThread(new Runnable() {
+//			@Override
+//			public void run() {
+//				mpay = MPay.getInstance(t, msa, UniPay.ch);
+//				if(mpay != null)
+//					mpay.initMPay();				
+//			}
+//		});
+//	}
+//
+//	public static void pay(final Activity t, Map<String, Object> root, JSONObject pay, final String m, final UniCallback cb) throws Exception {
+//		if(mpay == null)
+//			return;
+//		final String mm = pay.getString("money");
+//		mpay.xPay(pay.getString("pid"), UniPay.ch+"_"+mm, Integer.valueOf(mm+"00"), new MPayListener() {
+//			@Override
+//			public void callBack(String p1, String p2, int i1, int i2) {
+//				if(i1 == 1001) {
+//						ReportPaidThread.reportSuccess(t,TAG,mm,cb);					
+//				}
+//			}
+//		});
+//	}
+}

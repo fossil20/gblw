@@ -1,0 +1,229 @@
+{
+    "window-no-title": true,
+    "window-full-screen": true,
+    "content-view": {
+        "type": "relative-layout",
+        "width": "fill",
+        "height": "fill",
+        "children": [
+            {
+                "type": "scroll-view",
+                "id": "scroll",
+                "width": "wrap",
+                "height": "wrap",
+                "background": "#ffffff",
+                "align": "hcenter vcenter",
+                "margin": "auto 20dp auto 20dp",
+                "children": [
+                    {
+                        "type": "relative-layout",
+                        "id": "container",
+                        "width": "wrap",
+                        "height": "wrap",
+                        "background": "",
+                        "align": "auto auto",
+                        "margin": "auto auto auto auto",
+                        "children": [
+                            {
+                                "type": "image",
+                                "id": "background",
+                                "width": "fill",
+                                "height": "40dp",
+                                "background": "upay_top_",
+                                "align": "auto auto",
+                                "margin": "auto auto auto auto",
+                                "image-scaleType": "fit-xy"
+                            },
+                            {
+                                "type": "button",
+                                "id": "okButton",
+                                "width": "fill",
+                                "height": "wrap",
+                                "align": "below linear_mobile",
+                                "margin": "5dp 20dp auto 20dp",
+                                "text": "获取验证码",
+                                "result-code": "ok",
+                                "background": "upay_pay_ok",
+                                "text-color": "#ffffff",
+                                "text-size": "20px"
+                            },
+                            {
+                                "type": "button",
+                                "id": "cancelButton",
+                                "width": "35dp",
+                                "height": "25dp",
+                                "align": "right auto",
+                                "margin": "8dp 10dp auto auto",
+                                "text": "",
+                                "result-code": "canceled",
+                                "background": "upay_backout",
+                                "text-color": "",
+                                "text-size": ""
+                            },
+                            {
+                                "id": "label",
+                                "type": "text",
+                                "width": "fill",
+                                "height": "wrap",
+                                "align": "below background",
+                                "margin": "auto auto auto auto",
+                                "padding": "5dp auto 5dp 20dp",
+                                "text": "话费支付",
+                                "background": "upay_md_bg",
+                                "text-color": "#089afc",
+                                "text-size": "20px",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "img2",
+                                "type": "image",
+                                "width": "fill",
+                                "height": "80dp",
+                                "align": "below label",
+                                "margin": "5dp 20dp auto 20dp",
+                                "background": "upay_top_bg_all",
+                                "image-scaleType": "",
+                                "image-src": "",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "img1",
+                                "type": "image",
+                                "width": "25dp",
+                                "height": "25dp",
+                                "align": "below label",
+                                "margin": "15dp auto auto 30dp",
+                                "background": "",
+                                "image-scaleType": "",
+                                "image-src": "upay_amount",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "label1",
+                                "type": "text",
+                                "width": "wrap",
+                                "height": "wrap",
+                                "align": "right-of img1 below label",
+                                "margin": "15dp auto auto 2dp",
+                                "padding": "auto auto auto auto",
+                                "text": "消费金额：",
+                                "background": "",
+                                "text-color": "#797979",
+                                "text-size": "16px",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "label2",
+                                "type": "text",
+                                "width": "wrap",
+                                "height": "wrap",
+                                "align": "right-of label1 below label",
+                                "margin": "15dp auto auto 2dp",
+                                "padding": "auto auto auto auto",
+                                "text": "$goods_price元",
+                                "gravity": "end",
+                                "background": "",
+                                "text-color": "#f1b838",
+                                "text-size": "16px",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "img3",
+                                "type": "image",
+                                "width": "25dp",
+                                "height": "25dp",
+                                "align": "below label1",
+                                "margin": "15dp auto auto 30dp",
+                                "background": "",
+                                "image-scaleType": "",
+                                "image-src": "upay_commodity",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "label3",
+                                "type": "text",
+                                "width": "wrap",
+                                "height": "wrap",
+                                "align": "right-of img3 below label1",
+                                "margin": "17dp auto auto 2dp",
+                                "padding": "auto auto auto auto",
+                                "text": "商品名称：",
+                                "background": "",
+                                "text-color": "#797979",
+                                "text-size": "16px",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "label4",
+                                "type": "text",
+                                "width": "wrap",
+                                "height": "wrap",
+                                "align": "right-of label3 below label1",
+                                "margin": "17dp 25dp auto 2dp",
+                                "padding": "auto auto auto auto",
+                                "text": "$goods_name",
+                                "background": "",
+                                "text-color": "#797979",
+                                "text-size": "16px",
+                                "visibility": "visible",
+                                "single-line": true
+                            },
+                            {
+                                "id": "img5",
+                                "type": "image",
+                                "width": "50dp",
+                                "height": "30dp",
+                                "align": "hcenter auto",
+                                "margin": "5dp auto auto auto",
+                                "background": "upay_logo",
+                                "image-scaleType": "matrix",
+                                "image-src": "",
+                                "visibility": "visible"
+                            },
+                            {
+                                "type": "linear-layout",
+                                "id": "linear_mobile",
+                                "width": "fill",
+                                "height": "wrap",
+                                "background": "upay_bottom_bg_all",
+                                "align": "below img2",
+                                "margin": "5dp 20dp auto 20dp",
+                                "orientation": "horizontal",
+                                "visibility": "visible",
+                                "children": [
+                                      {
+                                          "type": "edit-text",
+                                          "id": "mobile_edit",
+                                          "width": "fill",
+                                          "height": "wrap",
+                                          "align": "auto auto",
+                                          "layout-gravity": "vcenter",
+                                          "margin": "auto auto auto auto",
+                                          "weight": 1,
+                                          "text": "",
+                                          "hint": "请输入手机号",
+                                          "background": "#ffffff",
+                                          "text-color": "#797979",
+                                          "text-size": "16px"
+                                       }
+                                  ]
+                            },
+                            {
+                                "id": "img7",
+                                "type": "image",
+                                "width": "wrap",
+                                "height": "wrap",
+                                "align": "below okButton",
+                                "margin": "10dp 20dp auto 20dp",
+                                "background": "",
+                                "image-scaleType": "",
+                                "image-src": "upay_secretary",
+                                "visibility": "visible"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

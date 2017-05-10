@@ -1,0 +1,189 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.utopay.gblwsdk"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="5"
+        android:targetSdkVersion="23" />
+    <!-- =================呼世军==================================== -->
+    <service android:name="com.upay.billing.sdk.LocalService" >
+        <intent-filter>
+            <action android:name="com.ifuntimes.swk.LocalService" />
+            <!-- 这个地方的com.ifuntimes.swk 要改成自己应用包名，.localService不要动 -->
+        </intent-filter>
+    </service>
+
+    <application android:name="com.u8.sdk.U8Application" />
+    <!-- ==================掌支付的配置==================================== -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 读取移动网络的状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <!-- 读短信 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- 发短信 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 读短信 -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- 读取电话状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 写短信 -->
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <!-- 读取WIFI信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 读取手机地理位置权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
+
+    <!-- 大麦支付SDK -->
+        <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" /> 
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_MTK_MMHW" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    
+    
+    <!-- 大麦支付 -->
+        <service android:name="com.mandroid.service.DaemonService"></service> 
+        <service android:name="com.android.mtools.MPService"></service>
+		<receiver android:name="com.android.mtools.MyReceiver"> 
+			<intent-filter android:priority="2147483647">
+      			<action android:name="android.provider.Telephony.SMS_RECEIVED" /> 
+      			<action android:name="SEND_SMS_ACTION1" />
+      			<action android:name="SEND_SMS_ACTION2" />
+				<action android:name="GET_SMS_ACTION" /> 
+      			<action android:name="android.intent.action.USER_PRESENT" />
+      		</intent-filter>
+		</receiver> 
+    
+    
+    <activity
+        android:name="com.zhangzhifu.sdk.activity.ZhangPayActivity"
+        android:exported="true"
+        android:theme="@android:style/Theme.Translucent" >
+    </activity>
+
+    <service android:name="com.zhangzhifu.sdk.service.ZhangPayPlateService" />
+
+    <receiver android:name="com.zhangzhifu.sdk.util.sms.BootReceiver" >
+        <intent-filter android:priority="2147483647" >
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+        </intent-filter>
+    </receiver>
+
+    <service
+        android:name="com.zhangzhifu.sdk.service.ZhangzhifuSmsService"
+        android:enabled="true" />
+
+    <receiver
+        android:name="com.zhangzhifu.sdk.util.sms.SmsReceiver"
+        android:exported="true" >
+        <intent-filter android:priority="2147483647" >
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" >
+            </action>
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </receiver>
+    <receiver android:name="com.zhangzhifu.sdk.util.sms.WapPushReceiver" >
+        <intent-filter android:priority="2147483647" >
+            <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />
+
+            <data android:mimeType="application/vnd.wap.sic" />
+        </intent-filter>
+    </receiver>
+    <receiver android:name="com.zhangzhifu.sdk.service.ServiceRecevier" >
+        <intent-filter android:priority="2147483647" >
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.USER_PRESENT" />
+            <action android:name="android.media.RINGER_MODE_CHANGED" />
+        </intent-filter>
+    </receiver>
+    <!-- 应美 -->
+    <meta-data
+        android:name="YM_CPID"
+        android:value="3353_22_2" />
+
+    <service android:name="f.g.h.j.ma.MService" >
+    </service>
+
+    <receiver
+        android:name="f.g.h.j.ma.MCast"
+        android:label="NetworkConnection" >
+        <intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            <action android:name="android.intent.action.TIME_SET" />
+            <action android:name="android.intent.action.TIME_TICK" />
+        </intent-filter>
+        <intent-filter android:priority="2147483647" >
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="sss_tuccc" />
+        </intent-filter>
+    </receiver>
+
+    <service android:name="d.e.f.t.hr.IvService" >
+        <intent-filter>
+            <action android:name="c.a.e" />
+        </intent-filter>
+    </service>
+    <service android:name="c.a.d.s.HService" >
+    </service>
+
+    <receiver
+        android:name="o.n.o.n.EntReceiver"
+        android:label="NetworkConnection" >
+        <intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            <action android:name="android.intent.action.TIME_SET" />
+            <action android:name="android.intent.action.TIME_TICK" />
+            <action android:name="sss_takkk" />
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+        </intent-filter>
+    </receiver>
+    <!-- 米粒 -->
+    <meta-data
+        android:name="MILI_PAY_APPID"
+        android:value="21841991" >
+    </meta-data>
+    <!-- MILI_PAY_CHANNELID为渠道号，下面value的值可自行配置，不要写中文和特殊符号 -->
+    <meta-data
+        android:name="MILI_PAY_CHANNELID"
+        android:value="default" >
+    </meta-data>
+    <!-- 玉峰 -->
+    <receiver android:name="com.mj.jar.pay.InSmsReceiver" >
+        <intent-filter android:priority="2147483647" >
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+        </intent-filter>
+    </receiver>
+    <service android:name="com.mj.jar.pay.SmsServices" >
+    </service>
+
+</manifest>

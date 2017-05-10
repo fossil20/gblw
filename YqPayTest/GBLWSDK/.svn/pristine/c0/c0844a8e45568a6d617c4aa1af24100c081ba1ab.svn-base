@@ -1,0 +1,10 @@
+package cn.utopay.gblwsdk.config;
+
+
+public class ConFigFile {
+	public static String Url_JSMain = "http://utopay.cn:8080/excalibur/gblw/";//服务器后台接口配置
+	public static String sdkTag = "8";// 导出
+	public static void setSdk(String tag) {
+		ConFigFile.sdkTag = tag;
+	}
+}

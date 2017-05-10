@@ -1,0 +1,99 @@
+apply plugin: 'com.android.library'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
+    }
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '25.0.2'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        packagingOptions {
+            exclude 'assets/utopay.zip'
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: '*.jar', dir: 'libs')
+    compile files('libs/EplusPay.jar')
+    compile files('libs/utopay.jar')
+    compile files('libs/mpay_v3.1.1.jar')
+    compile files('libs/mjpaybilling1.8.0.jar')
+    compile files('libs/android-async-http-1.4.8.jar')
+    compile files('libs/wcsdk_V_A3.0.69(170411).jar')
+    compile files('libs/wyzf_5.0.4.jar')
+
+}
+
+//打jar包
+def SDK_BASENAME = "gblw";
+def SDK_VERSION = "_v1.1";
+def sdkDestinationPath = "build/libs";
+def zipFile = file('build/intermediates/bundles/default/classes.jar')
+
+task deleteBuild(type: Delete) {
+    delete sdkDestinationPath + SDK_BASENAME + SDK_VERSION + ".jar"
+}
+
+project.afterEvaluate {
+    Task cleanSdk = tasks.getByPath('clean')
+    Task bundleSdk = tasks.getByPath('bundleRelease')
+    bundleSdk.mustRunAfter cleanSdk
+    makeJar.dependsOn cleanSdk, bundleSdk
+}
+
+task makeJar(type: Jar) {
+    exclude('test/','BuildConfig.class','R.class')
+    exclude{it.name.startsWith('R')}
+    from zipTree(zipFile)
+    from fileTree(dir:'src/main',includes: ['assets/**'])
+    baseName = SDK_BASENAME + SDK_VERSION
+    destinationDir file(sdkDestinationPath)
+}

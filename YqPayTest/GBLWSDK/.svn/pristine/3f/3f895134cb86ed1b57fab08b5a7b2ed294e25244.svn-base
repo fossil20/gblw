@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<goods>
+    <!-- productID:游戏中商品固定ID -->
+    <!-- payCode:计费点别名 -->
+    <good productID="1" priciePointId="51341717" money="10"  priciePointName="每日签到"/>
+    <good productID="2" priciePointId="51341718" money="10"  priciePointName="感恩礼包"/> 
+    <good productID="3" priciePointId="51341719" money="10"  priciePointName="登陆奖励"/>
+    <good productID="4" priciePointId="51341720" money="10"  priciePointName="畅玩大礼包"/>
+    <good productID="5" priciePointId="51341721" money="10"  priciePointName="闯关大礼包"/>
+    <good productID="6" priciePointId="51341722" money="8"  priciePointName="超级复活"/>  
+    <good productID="7" priciePointId="51341723" money="4"  priciePointName="立即复活"/>  
+    <good productID="8" priciePointId="51341724" money="10"  priciePointName="胜利大礼包"/>
+    <good productID="9" priciePointId="51341725" money="10"  priciePointName="三星通关"/>
+    <good productID="10" priciePointId="51341726" money="6"  priciePointName="强化装备"/>
+    <good productID="11" priciePointId="51341727" money="6"  priciePointName="护盾"/>
+    <good productID="12" priciePointId="51341728" money="10"  priciePointName="白鸽援护"/>
+    <good productID="13" priciePointId="51341729" money="10"  priciePointName="支援礼包"/>
+    <good productID="14" priciePointId="51341730" money="6"  priciePointName="金币礼包1"/>
+    <good productID="15" priciePointId="51341731" money="8"  priciePointName="金币礼包2"/>
+    <good productID="16" priciePointId="51341732" money="10"  priciePointName="金币礼包3"/>
+    <good productID="17" priciePointId="51341733" money="10"  priciePointName="神秘礼包"/>
+</goods>

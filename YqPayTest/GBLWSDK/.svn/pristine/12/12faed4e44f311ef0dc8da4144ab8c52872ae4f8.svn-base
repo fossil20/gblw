@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sdks>
+    <sdk name="com.u8.sdk.AndGamePay" type="A" />
+    <sdk name="com.u8.sdk.ERongPay" type="B" />
+    <sdk name="com.u8.sdk.UPayPay" type="C" />
+    <sdk name="com.u8.sdk.YixunPay" type="D" />
+    <sdk name="com.u8.sdk.LemiPay" type="E" />
+    <sdk name="com.u8.sdk.UUCPay" type="F" />
+    <sdk name="com.u8.sdk.YijiePay" type="G" />
+    <sdk name="com.u8.sdk.ZPayPay" type="H" />
+    <sdk name="com.u8.sdk.HMengPay" type="I" />
+    <sdk name="com.u8.sdk.EpayPay" type="J" />
+    <sdk name="com.u8.sdk.MiliPay" type="K" />
+    <sdk name="com.u8.sdk.LetuPay" type="L" />
+    <sdk name="com.u8.sdk.WimiPay" type="M" />
+    <sdk name="com.u8.sdk.SkyPay" type="N" />
+    <sdk name="com.u8.sdk.MifuPay" type="O" />
+    <sdk name="com.u8.sdk.XHWPPay" type="P" />
+    <sdk name="com.u8.sdk.ZPayPay" type="Q" />
+    <sdk name="com.u8.sdk.ZPayPay" type="R" />
+    <sdk name="com.u8.sdk.ZPayPay" type="S" />
+    <sdk name="com.u8.sdk.ZPayPay" type="T" />
+    <sdk name="com.u8.sdk.ZPayPay" type="U" />
+    <sdk name="com.u8.sdk.ZPayPay" type="V" />
+    <sdk name="com.u8.sdk.ZPayPay" type="W" />
+    <sdk name="com.u8.sdk.ZPayPay" type="X" />
+    <sdk name="com.u8.sdk.ZPayPay" type="Y" />
+    <sdk name="com.u8.sdk.ZPayPay" type="Z" />
+</sdks>

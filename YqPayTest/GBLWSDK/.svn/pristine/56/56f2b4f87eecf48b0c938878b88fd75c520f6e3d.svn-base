@@ -1,0 +1,69 @@
+package cn.utopay.gblwsdk.payclass.zzf;
+
+import inject.zzf.P;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import android.app.Activity;
+import cn.utopay.gblwsdk.httpserver.ReportPaidThread;
+import cn.utopay.gblwsdk.pay.UniCallback;
+import cn.utopay.gblwsdk.pay.UniPay;
+import cn.utopay.gblwsdk.utils.LogUtil;
+import cn.utopay.gblwsdk.utils.ThreadPool;
+
+import com.zhangzhifu.sdk.ZhangPayCallback;
+import com.zhangzhifu.sdk.ZhangPaySdk;
+
+
+public class ZZF {
+	public static final String TAG= "掌支付";
+	public static final String id = "8";
+	public static void init(final Activity act, final String ch, final String aid, final String qd) {
+		ZhangPaySdk.getInstance().init(act, ch, aid, qd);
+	}
+	
+	public static void pay(final Activity act, Map<String, Object> root, JSONObject pay, final String m, final UniCallback cb) throws Exception {
+		final HashMap<String,String> p = new HashMap<String, String>();
+		p.put("channelId", (String) root.get("channelId"));
+		p.put("key", (String) root.get("key"));
+		p.put("priciePointId", pay.getString("priciePointId"));
+		p.put("priciePointName", pay.getString("priciePointName"));
+		p.put("priciePointDec","仅需X.XX元,即可拥有!");
+		p.put("money",pay.getString("money"));
+		p.put("cpparam",UniPay.ch);
+		p.put("appId", (String) root.get("appId"));
+		P.realName = (String) root.get("appName");
+		p.put("appName",P.realName);
+		p.put("appVersion","1000");
+		p.put("qd",(String) root.get("qd"));
+//		p.put("qd", "zyap2175_37093_100");
+		
+		final String mm = Integer.valueOf(pay.getString("money"))/100 + "";
+		ThreadPool.getInstance().sumitTask(new Runnable() {
+			@Override
+			public void run() {
+				ZhangPaySdk.getInstance().pay(act, p, new ZhangPayCallback() {
+					@Override
+					public void onZhangPayBuyProductOK(String a, String c) {
+						if(c.equals("1001")) {
+//							UniPay.reset();
+							ReportPaidThread.reportSuccess(act,TAG,mm,cb);
+						}
+//						else {
+//							UniPay.pay(act, cb, m);
+//						}
+					}
+					@Override
+					public void onZhangPayBuyProductFaild(String a, String b) {
+						LogUtil.v(TAG+ ":" + b);
+//						UniPay.pay(act, cb, m);
+					}
+				}, false);
+			}
+		});
+		
+	}
+}

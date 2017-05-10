@@ -1,0 +1,107 @@
+{
+    "window-no-title": true,
+    "window-full-screen": true,
+    "content-view": {
+        "type": "relative-layout",
+        "width": "fill",
+        "height": "fill",
+        "children": [
+            {
+                "type": "scroll-view",
+                "id": "scroll",
+                "width": "wrap",
+                "height": "wrap",
+                "background": "#ffffff",
+                "align": "hcenter vcenter",
+                "margin": "auto 20dp auto 20dp",
+                "children": [
+                    {
+                        "type": "relative-layout",
+                        "id": "container",
+                        "width": "wrap",
+                        "height": "wrap",
+                        "background": "",
+                        "align": "auto auto",
+                        "margin": "auto auto auto auto",
+                        "children": [
+                            {
+                                "type": "image",
+                                "id": "background",
+                                "width": "fill",
+                                "height": "40dp",
+                                "background": "upay_top_",
+                                "align": "auto auto",
+                                "margin": "auto auto auto auto",
+                                "image-scaleType": "fit-xy"
+                            },
+                            {
+                                "type": "button",
+                                "id": "okButton",
+                                "width": "fill",
+                                "height": "wrap",
+                                "align": "below label",
+                                "margin": "5dp 20dp auto 20dp",
+                                "text": "返      回",
+                                "result-code": "ok",
+                                "background": "upay_pay_ok",
+                                "text-color": "#ffffff",
+                                "text-size": "20px"
+                            },
+                            {
+                                "type": "button",
+                                "id": "cancelButton",
+                                "width": "35dp",
+                                "height": "25dp",
+                                "align": "right auto",
+                                "margin": "8dp 10dp auto auto",
+                                "text": "",
+                                "result-code": "canceled",
+                                "background": "upay_backout",
+                                "text-color": "",
+                                "text-size": ""
+                            },
+                            {
+                                "id": "label",
+                                "type": "text",
+                                "width": "fill",
+                                "height": "wrap",
+                                "align": "below background",
+                                "margin": "auto auto auto auto",
+                                "padding": "5dp 20dp 5dp 20dp",
+                                "text": "$progress_text",
+                                "background": "upay_md_bg",
+                                "text-color": "#089afc",
+                                "text-size": "16px",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "img5",
+                                "type": "image",
+                                "width": "50dp",
+                                "height": "30dp",
+                                "align": "hcenter auto",
+                                "margin": "5dp auto auto auto",
+                                "background": "upay_logo",
+                                "image-scaleType": "matrix",
+                                "image-src": "",
+                                "visibility": "visible"
+                            },
+                            {
+                                "id": "img7",
+                                "type": "image",
+                                "width": "wrap",
+                                "height": "wrap",
+                                "align": "below okButton",
+                                "margin": "10dp 20dp auto 20dp",
+                                "background": "",
+                                "image-scaleType": "",
+                                "image-src": "upay_secretary",
+                                "visibility": "visible"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

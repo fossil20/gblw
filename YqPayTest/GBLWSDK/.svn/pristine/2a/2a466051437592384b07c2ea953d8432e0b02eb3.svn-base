@@ -1,0 +1,41 @@
+package cn.utopay.gblwsdk.payclass.utopay;
+
+import java.util.Map;
+
+import org.json.JSONObject;
+
+import android.app.Activity;
+import cn.utopay.gblwsdk.httpserver.ReportPaidThread;
+import cn.utopay.gblwsdk.pay.UniCallback;
+import cn.utopay.gblwsdk.pay.UniPay;
+import cn.utopay.gblwsdk.utils.LogUtil;
+import cn.utopay.gblwsdk.utils.ThreadPool;
+import cn.utopay.sdk.interfaces.PCallback;
+import cn.utopay.sdk.pay.YQPay;
+
+public class UTOPAY {
+	public static final String TAG = "云贝支付";
+	public static final String id = "1";
+
+	public static void init(final Activity t, String appId) {
+		YQPay.init(t, Integer.valueOf(appId), UniPay.ch);
+	}
+
+	public static void pay(final Activity t, Map<String, Object> root, JSONObject pay, final String m, final UniCallback cb) throws Exception {
+		final String payId =(String) pay.get("payId");
+		final String mm = pay.getString("money");
+		ThreadPool.getInstance().sumitTask(new Runnable() {
+			@Override
+			public void run() {
+				YQPay.pay(t, new PCallback() {
+					@Override
+					public void payEnd(int c) {
+						LogUtil.v(TAG + ":" + c);
+						if(c == 0)
+							ReportPaidThread.reportSuccess(t,TAG,mm,cb);						
+					}
+				}, payId, "");
+			}
+		});
+	}
+}

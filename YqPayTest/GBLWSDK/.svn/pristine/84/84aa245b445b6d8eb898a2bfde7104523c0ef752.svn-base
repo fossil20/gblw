@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="buy">false</item>
+    <item type="id" name="notification_img">false</item>
+    <item type="id" name="notification_content">false</item>
+    <item type="id" name="relativeLayout_top">false</item>
+    <item type="id" name="imageView1">false</item>
+    <item type="id" name="imagebutton_backout">false</item>
+    <item type="id" name="relativeLayout_md">false</item>
+    <item type="id" name="textView_md">false</item>
+    <item type="id" name="show_view">false</item>
+    <item type="id" name="tableLayout1">false</item>
+    <item type="id" name="imageView2">false</item>
+    <item type="id" name="textView_amount">false</item>
+    <item type="id" name="commodity_amount">false</item>
+    <item type="id" name="card_type_row">false</item>
+    <item type="id" name="imageView3">false</item>
+    <item type="id" name="textView_card_type">false</item>
+    <item type="id" name="card_value_row">false</item>
+    <item type="id" name="imageView4">false</item>
+    <item type="id" name="textView_card_value">false</item>
+    <item type="id" name="linearLayout_pay_toast">false</item>
+    <item type="id" name="editText_number">false</item>
+    <item type="id" name="editText_pw">false</item>
+    <item type="id" name="pay_ok">false</item>
+    <item type="id" name="imageView5">false</item>
+    <item type="id" name="imageView6">false</item>
+</resources>
