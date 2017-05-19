@@ -32,8 +32,10 @@ public class UniPayFactory<T extends BasePay> {
                     t.init(activity);
                 } catch (InstantiationException e) {
                     e.printStackTrace();
+                    BasePay.print(activity,payConfig.getSdkName() + ":" + e.toString());
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
+                    BasePay.print(activity,payConfig.getSdkName() + ":" + e.toString());
                 } finally {
                     BasePay.print(activity,payConfig.getSdkName() + "初始化结束");
                 }
@@ -51,8 +53,10 @@ public class UniPayFactory<T extends BasePay> {
                     t.init(activity, uniCallback);
                 } catch (InstantiationException e) {
                     e.printStackTrace();
+                    BasePay.print(activity,payConfig.getSdkName() + ":" + e.toString());
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
+                    BasePay.print(activity,payConfig.getSdkName() + ":" + e.toString());
                 }finally {
                     BasePay.print(activity,payConfig.getSdkName() + "初始化结束");
                 }
@@ -73,11 +77,13 @@ public class UniPayFactory<T extends BasePay> {
                             t.pay(activity, uniCallback);
                         } catch (InstantiationException e) {
                             e.printStackTrace();
+                            BasePay.print(activity,payConfig.getSdkName() + ":" + e.toString());
                             if (uniCallback != null) {
                                 uniCallback.payFailed(e);
                             }
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
+                            BasePay.print(activity,payConfig.getSdkName() + ":" + e.toString());
                             if (uniCallback != null) {
                                 uniCallback.payFailed(e);
                             }

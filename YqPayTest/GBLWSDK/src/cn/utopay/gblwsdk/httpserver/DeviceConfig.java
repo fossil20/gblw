@@ -11,7 +11,7 @@ import cn.utopay.gblwsdk.utils.SIMUtil;
 
 public class DeviceConfig {
 
-	public static Map<String, String> getUserBaseDeviceInfo(Context c,Integer appId,String ch) {
+	public static MyHashMap<String, String> getUserBaseDeviceInfo(Context c, Integer appId, String ch) {
 		MyHashMap<String, String> maps = new MyHashMap<String, String>();
 		maps.put("appId", String.valueOf(appId));
 		maps.put("imei", PhoneUtil.getIMEI(c));

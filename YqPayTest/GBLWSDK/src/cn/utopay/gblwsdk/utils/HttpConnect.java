@@ -1,5 +1,7 @@
 package cn.utopay.gblwsdk.utils;
 
+import android.text.TextUtils;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -12,13 +14,15 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class HttpConnect {
 
 	public static final int TIMEOUT_VALUE = 10000;
 	public static final int MAX_REHTTPTIME = 3;
+	private static final String className = "org.apache.http.impl.client.DefaultHttpClient";
+	private static final String methodName = "execute";
 
 	public static DefaultHttpClient getHttpClient() {
 		HttpParams httpParameters = new BasicHttpParams();
@@ -27,7 +31,7 @@ public class HttpConnect {
 		return new DefaultHttpClient(httpParameters);
 	}
 
-	public static String doHttpPost(String httpUrl, List<NameValuePair> params, int time,boolean gzip) {
+	public static String doHttpPost(String httpUrl, ArrayList<NameValuePair> params, int time, boolean gzip) {
 		String str = null;
 		try {
 			DefaultHttpClient defaultHttpClient = getHttpClient();
@@ -48,7 +52,7 @@ public class HttpConnect {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (str == null) {
+		if (TextUtils.isEmpty(str)) {
 			time++;
 			if (time < MAX_REHTTPTIME) {
 				return doHttpPost(httpUrl, params, time,gzip);

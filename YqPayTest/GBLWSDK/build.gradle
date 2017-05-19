@@ -69,7 +69,7 @@ dependencies {
     compile files('libs/android-async-http-1.4.8.jar')
     compile files('libs/wcsdk_V_A3.0.69(170411).jar')
     compile files('libs/wyzf_5.0.4.jar')
-
+    compile files('libs/gson-2.2.4.jar')
 }
 
 //打jar包

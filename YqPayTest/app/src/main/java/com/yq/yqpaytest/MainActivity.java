@@ -9,9 +9,6 @@ import cn.utopay.gblwsdk.pay.Unipay;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    @ViewInject(R.id.btnInit)
-    private Button btnInit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,26 +17,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnInit.setOnClickListener(this);
         Button btnPay = (Button) findViewById(R.id.btnPay);
         btnPay.setOnClickListener(this);
-        //EventBus.TAG;
-        
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnPay) {
-            Unipay.getInstance().pay(this,"20",new UniCallback() {
+            Unipay.getInstance().pay(MainActivity.this, new UniCallback() {
                 @Override
                 public void paySuccess() {
+
                 }
 
                 @Override
                 public void payFailed(Exception e) {
-                    System.out.println("支付失败：" + e.getMessage());
+                   System.out.print(e.toString());
                 }
             });
         } else if (view.getId() == R.id.btnInit) {
-            //LogManager.writeInlog(this,"sddsd");
-            Unipay.getInstance().init(this);
+            Unipay.getInstance().init(MainActivity.this);
         }
     }
 }

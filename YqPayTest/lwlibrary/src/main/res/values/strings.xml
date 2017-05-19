@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lwlibrary</string>
+    <string name="path">cn.utopay.gblwsdk.pay.Unipay</string>
+    <string name="init_method">init</string>
+    <string name="pay_method">pay</string>
+    <string name="callback_path">cn.utopay.gblwsdk.pay.UniCallback</string>
+    <string name="callback_method">paySuccess</string>
+</resources>

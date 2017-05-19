@@ -2,10 +2,6 @@ package cn.utopay.gblwsdk.httpserver;
 
 import android.app.Activity;
 import android.content.Context;
-import android.text.TextUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +17,9 @@ import cn.utopay.gblwsdk.payclass.weiyun.Weiyun;
 import cn.utopay.gblwsdk.payclass.ym.Ym;
 import cn.utopay.gblwsdk.payclass.yufeng.Yufeng;
 import cn.utopay.gblwsdk.preference.MyPreference;
-import cn.utopay.gblwsdk.utils.HttpConnect;
 import cn.utopay.gblwsdk.utils.JsonHelp;
+
+import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeHttp;
 
 
 public class SdkStartInitThread extends BaseHttpThread {
@@ -36,23 +33,29 @@ public class SdkStartInitThread extends BaseHttpThread {
 
 	@Override
 	public void run() {
-		String value = HttpConnect.doHttpPost(url, getPostParams(maps), 0, true);
+		//String value = HttpConnect.doHttpPost(url,getPostParams(maps),0,true);
+		String value = invokeHttp(url,getPostParams(maps),0,true);
 		BasePay.print(context,"sdkStart == " + value);
 		// 获取省份,保存
 		Activity t = (Activity) context;
 		try {
-			if (!TextUtils.isEmpty(value)) {
-				JSONArray jsonArray = new JSONArray(value);
-				if (!JsonHelp.isEmpty(jsonArray)) {
-					MyPreference.getInstance(context).saveJson(value);
-					initSDK(t, JsonHelp.getMapList(context));
-				} else {
-					initSDK(t, JsonHelp.getMapList(context));
-				}
-			} else {
-				initSDK(t, JsonHelp.getMapList(context));
+			Map<String,Object> map = JsonHelp.getMapForJsonObj(value);
+            if(map != null && !map.containsKey("message")){
+				MyPreference.getInstance(context).saveJson(value);
 			}
-		} catch (JSONException e) {
+			initSDK(t, JsonHelp.getMapList(context));
+//			if (!TextUtils.isEmpty(value)) {
+//				JSONArray jsonArray = new JSONArray(value);
+//				if (!JsonHelp.isEmpty(jsonArray)) {
+//					MyPreference.getInstance(context).saveJson(value);
+//					initSDK(t, JsonHelp.getMapList(context));
+//				} else {
+//					initSDK(t, JsonHelp.getMapList(context));
+//				}
+//			} else {
+//				initSDK(t, JsonHelp.getMapList(context));
+//			}
+		} catch (Exception e) {
 			initSDK(t, JsonHelp.getMapList(context));
 		}
 	}

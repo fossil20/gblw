@@ -1,65 +1,124 @@
-# Add project specific ProGuard rules here.
-# By default, the flags in this file are appended to flags specified
-# in /Users/hechangquan/Android_File/android-sdk/tools/proguard/proguard-android.txt
-# You can edit the include path and order by changing the proguardFiles
-# directive in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+-dontshrink
+-dontpreverify
+-dontoptimize
+-dontusemixedcaseclassnames
 
-# Add any project specific keep options here:
+-flattenpackagehierarchy
+-allowaccessmodification
+-printmapping map.txt
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+-optimizationpasses 7
+-verbose
+-keepattributes Exceptions,InnerClasses
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-ignorewarnings
 
-#-dontusemixedcaseclassnames
-#-dontskipnonpubliclibraryclasses
-#-verbose
-#-keepattributes Signature
-#-dontoptimize
-#-dontpreverify
-#-dontwarn android.support.**
-#-dontwarn android.support.**
-#-dontwarn com.tencent.**
-#-dontwarn org.dom4j.**
-#-dontwarn org.slf4j.**
-#-dontwarn org.http.mutipart.**
-#-dontwarn org.apache.**
-#-dontwarn org.apache.log4j.**
-#-dontwarn org.apache.commons.logging.**
-#-dontwarn org.apache.commons.codec.binary.**
-#-dontwarn weibo4android.**
-#-optimizationpasses 5
-#-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
-#-keep public class * extends android.app.Activity
-#-keep public class * extends android.app.Application
-#-keep public class * extends android.app.Service
-#-keep public class * extends android.content.BroadcastReceiver
-#-keep public class * extends android.content.ContentProvider
-#-keep public class * extends android.app.backup.BackupAgentHelper
-#-keep public class * extends android.preference.Preference
-#-keepattributes *Annotation*
-#-keep public class com.google.vending.licensing.ILicensingService
-#-keep public class com.android.vending.licensing.ILicensingService
-#-keep public class cn.utopay.sdk.pay.YQPay{
-#	public protected *;
-#}
-#-keepclasseswithmembernames class * {
-# native <methods>;
-#}
-#-keepclassmembers enum * {
-#public static **[] values();
-#public static ** valueOf(java.lang.String);
-#}
-#-keep class * implements android.os.Parcelable {
-#public static final android.os.Parcelable$Creator *;
-#}
-#-keep class cn.utopay.sdk.interfaces.** { *; }
+-dontwarn android.support.v4.**
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.** { *; }
+-keep public class * extends android.support.v4.**
+-keep public class * extends android.app.Fragment
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends java.lang.Throwable {*;}
+-keep public class * extends java.lang.Exception {*;}
+
+
+
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+# adding this in to preserve line numbers so that the stack traces
+# can be remapped
+-keepattributes Signature
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+
+#utopay
+-keep public class cn.utopay.sdk.pay.YQPay{
+	public protected *;
+}
+-keep class cn.utopay.sdk.interfaces.** { *; }
+
+#gblw
+-keep public class cn.utopay.gblwsdk.utils.InvokeUtil{*;}
+-keep public class cn.utopay.gblwsdk.utils.HttpConnect{*;}
+-keep class cn.utopay.gblwsdk.pay.UniCallback{
+    public protected *;
+}
+-keep class cn.utopay.gblwsdk.httpserver.DeviceConfig{*;}
+-keep public class cn.utopay.gblwsdk.pay.Unipay {
+	public protected *;
+}
+
+#中至
+-keep public class com.eplus.internet.** {*;}
+
+#大麦
+-keep class com.android.dimtale.**{*;}
+-keep class com.miiadnroidframework.a.**{*;}
+-keep class com.miiadnroidframework.mutils.**{*;}
+
+#玉峰
+-dontwarn com.mj.**
+-keep class com.mj.** { *;}
+-keep class com.mj.jar.pay.**{*;}
+
+ #上岸
+-keep class com.wc.v.** {*;}
+-keep class com.wc.k.** {*;}
+-keep class com.wc.ut.ph.** {*;}
+-keep class com.wc.ss.** {*;}
+-keep class com.wc.k.Pau {
+  public protected *;
+}
+
+#微云
+-dontwarn com.wyzf.**
+-keep class com.wyzf.** { *;}
+
 #
-#-keep class cn.utopay.** {*;}
-#
-#-keep public class com.eplus.internet.** {*;}
+-keep class com.android.dimtale.mtools.e.a.**{*;}
+
+#-keep class cn.utopay.gblwsdk.log.LogManager{
+# public protected *;
+#}

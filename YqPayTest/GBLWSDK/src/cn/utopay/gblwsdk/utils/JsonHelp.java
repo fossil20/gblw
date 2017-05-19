@@ -42,7 +42,10 @@ public class JsonHelp {
      * @param jsonStr 
      * @return 
      */
-    public static Map<String, Object> getMapForJson(String jsonStr) {
+    public static Map<String, Object> getMapForJsonObj(String jsonStr) {
+        if(TextUtils.isEmpty(jsonStr)){
+            return null;
+        }
         JSONObject jsonObject;
         try {
             jsonObject = new JSONObject(jsonStr);
@@ -57,10 +60,38 @@ public class JsonHelp {
             }
             return valueMap;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return null;
     }
+
+
+//    public static Map<String, Object> getMapForJsoArray(String jsonStr) {
+//        if(TextUtils.isEmpty(jsonStr)){
+//            return null;
+//        }
+//        JSONArray jsonArray;
+//        try {
+//            jsonArray = new JSONArray(jsonStr);
+//            for(int i = 0;i<jsonArray.length();i++){
+//                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//            }
+//            jsonArray.getJSONObject();
+//            Iterator<String> keyIter = jsonObject.keys();
+//            String key;
+//            Object value;
+//            Map<String, Object> valueMap = new HashMap<String, Object>();
+//            while (keyIter.hasNext()) {
+//                key = keyIter.next();
+//                value = jsonObject.get(key);
+//                valueMap.put(key, value);
+//            }
+//            return valueMap;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     /** 
      * Json 转成 List<Map<>> 
@@ -80,8 +111,8 @@ public class JsonHelp {
                 payJsonObj = jsonObj.optJSONObject("pay");
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("sdkName", jsonObj.get("sdkName"));
-                map.put("init", getMapForJson(initJsonObj.toString()));
-                map.put("pay", getMapForJson(payJsonObj.toString()));
+                map.put("init", getMapForJsonObj(initJsonObj.toString()));
+                map.put("pay", getMapForJsonObj(payJsonObj.toString()));
                 list.add(map);
             }
         } catch (Exception e) {

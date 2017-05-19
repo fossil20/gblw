@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/GBLWSDK/GBLWSDK.iml" filepath="$PROJECT_DIR$/GBLWSDK/GBLWSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/YqPayTest.iml" filepath="$PROJECT_DIR$/YqPayTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lwlibrary/lwlibrary.iml" filepath="$PROJECT_DIR$/lwlibrary/lwlibrary.iml" />
     </modules>
   </component>
 </project>

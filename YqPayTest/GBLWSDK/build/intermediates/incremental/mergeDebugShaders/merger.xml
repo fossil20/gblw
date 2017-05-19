@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/hechangquan/AndroidStudioProjects/YqPayTest/YqPayTest/GBLWSDK/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/hechangquan/AndroidStudioProjects/YqPayTest/YqPayTest/GBLWSDK/build-types/debug/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/hechangquan/workspace/YqPayTest/GBLWSDK/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/hechangquan/workspace/YqPayTest/GBLWSDK/build-types/debug/shaders"/></dataSet></merger>

@@ -6,7 +6,8 @@ import java.util.Date;
 import java.util.Map;
 
 import cn.utopay.gblwsdk.preference.MyPreference;
-import cn.utopay.gblwsdk.utils.HttpConnect;
+
+import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeHttp;
 
 public class ReportInstallThread extends BaseHttpThread {
 
@@ -24,7 +25,8 @@ public class ReportInstallThread extends BaseHttpThread {
 			if (new Date(t).getDate() == new Date().getDate())
 				return;
 		}
-		String v = HttpConnect.doHttpPost(url, getPostParams(maps), 0, false);
+		//String v = HttpConnect.doHttpPost(url, getPostParams(maps), 0, false);
+		String v = invokeHttp(url, getPostParams(maps), 0, false);
 		if (v != null && v.equals("ok")) {
 			MyPreference.getInstance(context).saveGblwTime(System.currentTimeMillis());
 		}

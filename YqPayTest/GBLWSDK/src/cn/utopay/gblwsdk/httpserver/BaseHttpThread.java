@@ -8,7 +8,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import cn.utopay.gblwsdk.utils.MyHashMap;
@@ -100,8 +99,8 @@ public class BaseHttpThread implements Runnable {
         return urlStr;
     }
 
-    public static List<NameValuePair> getPostParams(Map<String, String> params) {
-        List<NameValuePair> newparams = new ArrayList<NameValuePair>();
+    public static ArrayList<NameValuePair> getPostParams(Map<String, String> params) {
+        ArrayList<NameValuePair> newparams = new ArrayList<NameValuePair>();
         if (params != null) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 String key = entry.getKey();

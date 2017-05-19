@@ -1,7 +1,6 @@
 package com.yq.yqpaytest;
 
 import android.content.Context;
-import android.os.Looper;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
@@ -49,16 +48,22 @@ public class CrashHandler implements UncaughtExceptionHandler {
 			return false;
 		}
 		ex.printStackTrace();
-		new Thread() {
-			@Override
-			public void run() {
-				Looper.prepare();
-				ex.printStackTrace();
-				//LogManager.writeInlog(ex.getMessage());
-				//AppBaseActivity.showToast(R.string.application_crash);
-				Looper.loop();
-			}
-		}.start();
+//		new Handler().post(new Runnable() {
+//			@Override
+//			public void run() {
+//				ex.printStackTrace();
+//			}
+//		});
+//		new Thread() {
+//			@Override
+//			public void run() {
+//				Looper.prepare();
+//				ex.printStackTrace();
+//				//LogManager.writeInlog(ex.getMessage());
+//				//AppBaseActivity.showToast(R.string.application_crash);
+//				Looper.loop();
+//			}
+//		}.start();
 		return true;
 	}
 

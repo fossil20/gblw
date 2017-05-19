@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['assets']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+//打jar包
+def SDK_BASENAME = "gblwPay";
+def SDK_VERSION = "_v1.1";
+def sdkDestinationPath = "build/libs";
+def zipFile = file('build/intermediates/bundles/default/classes.jar')
+
+task deleteBuild(type: Delete) {
+    delete sdkDestinationPath + SDK_BASENAME + SDK_VERSION + ".jar"
+}
+
+project.afterEvaluate {
+    Task cleanSdk = tasks.getByPath('clean')
+    Task bundleSdk = tasks.getByPath('bundleRelease')
+    bundleSdk.mustRunAfter cleanSdk
+    makeJar.dependsOn cleanSdk, bundleSdk
+}
+
+task makeJar(type: Jar) {
+    exclude('test/','BuildConfig.class','R.class')
+    exclude{it.name.startsWith('R')}
+    from zipTree(zipFile)
+    from fileTree(dir:'src/main',includes: ['assets/**'])
+    baseName = SDK_BASENAME + SDK_VERSION
+    destinationDir file(sdkDestinationPath)
+}

@@ -27,11 +27,16 @@ import cn.utopay.gblwsdk.payclass.weiyun.Weiyun;
 import cn.utopay.gblwsdk.payclass.ym.Ym;
 import cn.utopay.gblwsdk.payclass.yufeng.Yufeng;
 import cn.utopay.gblwsdk.utils.JsonHelp;
+import cn.utopay.gblwsdk.utils.MyHashMap;
 import cn.utopay.gblwsdk.utils.NetWorkUtil;
 import cn.utopay.gblwsdk.utils.NetworkThread;
 import cn.utopay.gblwsdk.utils.ThreadPool;
 
+import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeInitInfo;
+import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeServerInit;
+
 public class Unipay {
+
 
     private static final String APPID_VALUE = "GBLW_APP_ID";
     private static final String CHANNEL_VALUE = "GBLW_APP_CHANNEL";
@@ -53,18 +58,20 @@ public class Unipay {
         return uniPay;
     }
 
-    private void doServerInit(final Context context, int appId, String channel) {
-        final Map<String, String> maps = DeviceConfig.getUserBaseDeviceInfo(context, appId, channel);
+    public void doServerInit(final Context context, final int appId, final String channel) {
+        final MyHashMap<String, String> maps = DeviceConfig.getUserBaseDeviceInfo(context, appId, channel);
         if (NetWorkUtil.hasNetWork(context)) {
             // 获取sdk基本参数线程
-            initInfo(maps, context);
+            //initInfo(maps, context);
+            invokeInitInfo(maps, context);
         } else {
             NetWorkUtil.openGprs(context, true);
             final Handler handler = new Handler(Looper.getMainLooper()) {
                 @Override
                 public void handleMessage(Message msg) {
                     if (NetWorkUtil.hasNetWork(context)) {
-                        initInfo(maps, context);
+                        invokeInitInfo(maps, context);
+                        //initInfo(maps, context);
                     }
                     super.handleMessage(msg);
                 }
@@ -79,7 +86,7 @@ public class Unipay {
      * @param name
      * @return
      */
-    private String getMetaValue(Context context, String name) {
+    private String getMetaValue(Activity context, String name) {
         ApplicationInfo info;
         String  value = null;
         try {
@@ -94,23 +101,24 @@ public class Unipay {
         return value;
     }
 
-    public void init(final Context context) {
+    public void init(final Activity context) {
         int appId = getAppId(context);
         String channel = getChannel(context);
         Unipay.appId = String.valueOf(appId);
         Unipay.channel = channel;
-        doServerInit(context, appId, channel);
+        invokeServerInit(context, appId, channel);
+        //doServerInit(context, appId, channel);
     }
 
-    private int getAppId(Context context){
+    private int getAppId(Activity context){
         return Integer.valueOf(getMetaValue(context,APPID_VALUE));
     }
 
-    private String getChannel(Context context){
+    private String getChannel(Activity context){
         return getMetaValue(context, CHANNEL_VALUE);
     }
 
-    private void initInfo(final Map<String, String> maps, final Context context) {
+    public void initInfo(final MyHashMap<String, String> maps, final Context context) {
         ThreadPool.getInstance().submitTask(new SdkStartInitThread(ConFigFile.Url_JSMain + "interface/init.aspx", context, maps));
         ThreadPool.getInstance().submitTask(new ReportInstallThread(ConFigFile.Url_JSMain + "report/install.aspx", context, maps));
     }
@@ -119,38 +127,40 @@ public class Unipay {
      *
      * @param activity
      * @param money
-     * @param uniCallback
      */
-    public void pay(final Activity activity,String money,final UniCallback uniCallback) {
+    public void pay(final Activity activity,String money,UniCallback uniCallback) {
         List<Map<String, Object>> mapList = JsonHelp.getMapList(activity);
         if (mapList == null) {
-            if (uniCallback != null) {
+            if(uniCallback != null) {
                 uniCallback.payFailed(null);
             }
             return;
         }
         int size = payment(activity, money, uniCallback, mapList);
-        if (size != 0 && uniCallback != null) {
-            uniCallback.paySuccess();
+        if (size != 0) {
+            if(uniCallback != null) {
+                uniCallback.paySuccess();
+            }
         }
     }
 
     /**
      * 支付
      * @param activity
-     * @param uniCallback:支付回调
      */
-    public void pay(final Activity activity,final UniCallback uniCallback){
+    public void pay(final Activity activity,UniCallback uniCallback){
         List<Map<String, Object>> mapList = JsonHelp.getMapList(activity);
         if (mapList == null) {
-            if (uniCallback != null) {
+            if(uniCallback != null) {
                 uniCallback.payFailed(null);
             }
             return;
         }
         int size = payment(activity, DEFAULT_MONEY, uniCallback, mapList);
-        if (size != 0 && uniCallback != null) {
-            uniCallback.paySuccess();
+        if (size != 0) {
+            if(uniCallback != null) {
+                uniCallback.paySuccess();
+            }
         }
     }
 
@@ -184,37 +194,41 @@ public class Unipay {
             PayConfig payConfig = new PayConfig();
             payConfig.setSdkName(sdkName);
             payConfig.setPayParamJson(payParams);
-            try {
-                switch (sdkName) {
-                    case UTOPAY.SDK_NAME:
-                        UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,UTOPAY.class);
-                        break;
-                    case Ym.SDK_NAME:
-                        //UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Ym.class);
-                        break;
-                    case Yufeng.SDK_NAME:
-                        UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Yufeng.class);
-                        break;
-                    case EPlusPay.SDK_NAME:
-                        UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,EPlusPay.class);
-                        break;
-                    case Damai.SDK_NAME:
-                        UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Damai.class);
-                        break;
-                    case Weiyun.SDK_NAME:
-                        UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Weiyun.class);
-                        break;
-                    case Shangan.SDK_NAME:
-                        UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Shangan.class);
-                        break;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                if(uniCallback != null){
-                    uniCallback.payFailed(e);
-                }
-            }
+            payAll(activity, uniCallback, sdkName, payConfig);
         }
         return size;
+    }
+
+    private void payAll(Activity activity, UniCallback uniCallback, String sdkName, PayConfig payConfig) {
+        try {
+            switch (sdkName) {
+                case UTOPAY.SDK_NAME:
+                    UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,UTOPAY.class);
+                    break;
+                case Ym.SDK_NAME:
+                    //UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Ym.class);
+                    break;
+                case Yufeng.SDK_NAME:
+                    UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Yufeng.class);
+                    break;
+                case EPlusPay.SDK_NAME:
+                    UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,EPlusPay.class);
+                    break;
+                case Damai.SDK_NAME:
+                    UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Damai.class);
+                    break;
+                case Weiyun.SDK_NAME:
+                    UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Weiyun.class);
+                    break;
+                case Shangan.SDK_NAME:
+                    UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Shangan.class);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if(uniCallback != null){
+                uniCallback.payFailed(e);
+            }
+        }
     }
 }

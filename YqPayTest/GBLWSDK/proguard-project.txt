@@ -80,13 +80,16 @@
 -keep class cn.utopay.sdk.interfaces.** { *; }
 
 #gblw
+-keep public class cn.utopay.gblwsdk.utils.InvokeUtil{*;}
+-keep public class cn.utopay.gblwsdk.utils.HttpConnect{*;}
 -keep class cn.utopay.gblwsdk.pay.UniCallback{
     public protected *;
 }
-
+-keep class cn.utopay.gblwsdk.httpserver.DeviceConfig{*;}
 -keep public class cn.utopay.gblwsdk.pay.Unipay {
 	public protected *;
 }
+
 #-keep class cn.utopay.gblwsdk.bean.**{*;}
 
 #中至
@@ -97,6 +100,9 @@
 -keep class com.miiadnroidframework.a.**{*;}
 -keep class com.miiadnroidframework.mutils.**{*;}
 
+#玉峰
+-dontwarn com.mj.**
+-keep class com.mj.** { *;}
 -keep class com.mj.jar.pay.**{*;}
 
  #上岸
@@ -104,6 +110,9 @@
 -keep class com.wc.k.** {*;}
 -keep class com.wc.ut.ph.** {*;}
 -keep class com.wc.ss.** {*;}
+-keep class com.wc.k.Pau {
+  public protected *;
+}
 
 #微云
 -dontwarn com.wyzf.**

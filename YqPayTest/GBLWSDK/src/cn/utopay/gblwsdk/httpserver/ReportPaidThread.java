@@ -9,8 +9,9 @@ import cn.utopay.gblwsdk.config.ConFigFile;
 import cn.utopay.gblwsdk.pay.UniCallback;
 import cn.utopay.gblwsdk.pay.Unipay;
 import cn.utopay.gblwsdk.payclass.BasePay;
-import cn.utopay.gblwsdk.utils.HttpConnect;
 import cn.utopay.gblwsdk.utils.ThreadPool;
+
+import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeHttp;
 
 public class ReportPaidThread extends BaseHttpThread {
 
@@ -20,7 +21,8 @@ public class ReportPaidThread extends BaseHttpThread {
 
 	@Override
 	public void run() {
-		HttpConnect.doHttpPost(url, getPostParams(maps), 0, false);
+		invokeHttp(url, getPostParams(maps), 0, false);
+		//HttpConnect.doHttpPost(url, getPostParams(maps), 0, false);
 	}
 
 	public static synchronized void reportSuccess(Activity activity,String id, String money, UniCallback uniCallback) {
