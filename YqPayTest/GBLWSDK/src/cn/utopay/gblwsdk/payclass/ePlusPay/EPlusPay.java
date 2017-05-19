@@ -20,6 +20,7 @@ import cn.utopay.gblwsdk.payclass.BasePay;
  */
 public class EPlusPay extends BasePay{
 
+    public static final String SDK_CODE = "4e2d81f3";
     public static final String SDK_NAME = "中至";
     private static final int SUCCESS_CODE = 200;
     public static final String id = "17";

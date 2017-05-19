@@ -19,6 +19,8 @@ import cn.utopay.sdk.pay.YQPay;
  */
 public class UTOPAY extends BasePay {
 
+	public static final String SDK_CODE = "4e918d1d652f4ed8";
+
 	public static final String SDK_NAME = "云贝支付";
 	public static final String id = "1";
 	private static final int SUCCESS_CODE = 0;

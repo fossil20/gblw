@@ -21,6 +21,7 @@ import cn.utopay.gblwsdk.payclass.BasePay;
  */
 public class Damai extends BasePay {
 
+    public static final String SDK_CODE = "59279ea6652f4ed8";
     public static final String SDK_NAME = "大麦支付";
     public static final String id = "14";
     private int SUCCESS_CODE = 1001;

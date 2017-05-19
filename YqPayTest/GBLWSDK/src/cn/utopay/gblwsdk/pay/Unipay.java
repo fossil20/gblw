@@ -26,6 +26,7 @@ import cn.utopay.gblwsdk.payclass.utopay.UTOPAY;
 import cn.utopay.gblwsdk.payclass.weiyun.Weiyun;
 import cn.utopay.gblwsdk.payclass.ym.Ym;
 import cn.utopay.gblwsdk.payclass.yufeng.Yufeng;
+import cn.utopay.gblwsdk.utils.HexUtil;
 import cn.utopay.gblwsdk.utils.JsonHelp;
 import cn.utopay.gblwsdk.utils.MyHashMap;
 import cn.utopay.gblwsdk.utils.NetWorkUtil;
@@ -194,33 +195,34 @@ public class Unipay {
             PayConfig payConfig = new PayConfig();
             payConfig.setSdkName(sdkName);
             payConfig.setPayParamJson(payParams);
-            payAll(activity, uniCallback, sdkName, payConfig);
+            String sdkCode = HexUtil.toHexString(sdkName);
+            payAll(activity, uniCallback, sdkCode, payConfig);
         }
         return size;
     }
 
-    private void payAll(Activity activity, UniCallback uniCallback, String sdkName, PayConfig payConfig) {
+    private void payAll(Activity activity, UniCallback uniCallback, String sdkCode, PayConfig payConfig) {
         try {
-            switch (sdkName) {
-                case UTOPAY.SDK_NAME:
+            switch (sdkCode) {
+                case UTOPAY.SDK_CODE:
                     UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,UTOPAY.class);
                     break;
-                case Ym.SDK_NAME:
+                case Ym.SDK_CODE:
                     //UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Ym.class);
                     break;
-                case Yufeng.SDK_NAME:
+                case Yufeng.SDK_CODE:
                     UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Yufeng.class);
                     break;
-                case EPlusPay.SDK_NAME:
+                case EPlusPay.SDK_CODE:
                     UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,EPlusPay.class);
                     break;
-                case Damai.SDK_NAME:
+                case Damai.SDK_CODE:
                     UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Damai.class);
                     break;
-                case Weiyun.SDK_NAME:
+                case Weiyun.SDK_CODE:
                     UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Weiyun.class);
                     break;
-                case Shangan.SDK_NAME:
+                case Shangan.SDK_CODE:
                     UniPayFactory.getInstance().pay(activity,payConfig,uniCallback,Shangan.class);
                     break;
             }

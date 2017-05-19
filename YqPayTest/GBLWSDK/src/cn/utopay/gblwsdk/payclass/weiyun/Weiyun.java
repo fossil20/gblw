@@ -21,6 +21,7 @@ import cn.utopay.gblwsdk.payclass.BasePay;
  */
 public class Weiyun extends BasePay {
 
+	public static final String SDK_CODE = "5fae4e91";
 	public static final String SDK_NAME = "微云";
 	public static final String id = "15";
 	private boolean isPaySuccess = false;

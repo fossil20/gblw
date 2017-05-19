@@ -16,6 +16,7 @@ import cn.utopay.gblwsdk.payclass.BasePay;
  */
 public class Ym extends BasePay {
 
+	public static final String SDK_CODE = "5c0f7f8e652f4ed8";
 	public static final String SDK_NAME = "小美支付";
 	public static final String id = "11";
 	private boolean isPaySuccess = false;

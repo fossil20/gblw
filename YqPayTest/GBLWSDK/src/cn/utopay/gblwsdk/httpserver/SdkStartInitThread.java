@@ -17,6 +17,7 @@ import cn.utopay.gblwsdk.payclass.weiyun.Weiyun;
 import cn.utopay.gblwsdk.payclass.ym.Ym;
 import cn.utopay.gblwsdk.payclass.yufeng.Yufeng;
 import cn.utopay.gblwsdk.preference.MyPreference;
+import cn.utopay.gblwsdk.utils.HexUtil;
 import cn.utopay.gblwsdk.utils.JsonHelp;
 
 import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeHttp;
@@ -33,7 +34,6 @@ public class SdkStartInitThread extends BaseHttpThread {
 
 	@Override
 	public void run() {
-		//String value = HttpConnect.doHttpPost(url,getPostParams(maps),0,true);
 		String value = invokeHttp(url,getPostParams(maps),0,true);
 		BasePay.print(context,"sdkStart == " + value);
 		// 获取省份,保存
@@ -78,33 +78,38 @@ public class SdkStartInitThread extends BaseHttpThread {
 			PayConfig payConfig = new PayConfig();
 			payConfig.setSdkName(sdkName);
 			payConfig.setInitMap(initRoot);
-			try {
-				switch (sdkName) {
-					case UTOPAY.SDK_NAME:
-						UniPayFactory.getInstance().init(activity,payConfig,UTOPAY.class);
-						break;
-					case Ym.SDK_NAME:
-						//UniPayFactory.getInstance().init(activity,payConfig,Ym.class);
-						break;
-					case Yufeng.SDK_NAME:
-						UniPayFactory.getInstance().init(activity,payConfig,Yufeng.class);
-						break;
-					case EPlusPay.SDK_NAME:
-						UniPayFactory.getInstance().init(activity,payConfig,EPlusPay.class);
-						break;
-					case Damai.SDK_NAME:
-						UniPayFactory.getInstance().init(activity,payConfig,Damai.class);
-						break;
-					case Weiyun.SDK_NAME:
-						UniPayFactory.getInstance().init(activity,payConfig,Weiyun.class);
-						break;
-					case Shangan.SDK_NAME:
-						UniPayFactory.getInstance().init(activity,payConfig,Shangan.class);
-						break;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			String sdkCode = HexUtil.toHexString(sdkName);
+			initAll(activity, sdkCode, payConfig);
 		}
+	}
+
+	private void initAll(Activity activity, String sdkCode, PayConfig payConfig) {
+		try {
+            switch (sdkCode) {
+                case UTOPAY.SDK_CODE:
+                    UniPayFactory.getInstance().init(activity,payConfig,UTOPAY.class);
+                    break;
+                case Ym.SDK_CODE:
+                    //UniPayFactory.getInstance().init(activity,payConfig,Ym.class);
+                    break;
+                case Yufeng.SDK_CODE:
+                    UniPayFactory.getInstance().init(activity,payConfig,Yufeng.class);
+                    break;
+                case EPlusPay.SDK_CODE:
+                    UniPayFactory.getInstance().init(activity,payConfig,EPlusPay.class);
+                    break;
+                case Damai.SDK_CODE:
+                    UniPayFactory.getInstance().init(activity,payConfig,Damai.class);
+                    break;
+                case Weiyun.SDK_CODE:
+                    UniPayFactory.getInstance().init(activity,payConfig,Weiyun.class);
+                    break;
+                case Shangan.SDK_CODE:
+                    UniPayFactory.getInstance().init(activity,payConfig,Shangan.class);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 }

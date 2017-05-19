@@ -17,6 +17,7 @@ import cn.utopay.gblwsdk.payclass.BasePay;
  */
 public class Shangan extends BasePay {
 
+    public static final String SDK_CODE = "4e0a5cb8";
     public static final String SDK_NAME = "上岸";
     public static final String id = "16";
     private boolean isPaySuccess = false;

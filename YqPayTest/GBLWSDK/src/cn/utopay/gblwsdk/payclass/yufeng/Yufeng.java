@@ -21,6 +21,7 @@ import cn.utopay.gblwsdk.payclass.BasePay;
  */
 public class Yufeng extends BasePay {
 
+    public static final String SDK_CODE = "73895cf0";
     public static final String SDK_NAME = "玉峰";
     public static final String id = "13";
     public static final int SUCCESS_CODE = 2000;

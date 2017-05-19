@@ -47,7 +47,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.0'
     //compile 'com.github.fossil20:gblw:v1.0'
     //compile project(path: ':lwlibrary')
-    //compile project(path: ':GBLWSDK')
-    compile(name: 'gblw_v1.2', ext: 'aar')
+    compile project(path: ':GBLWSDK')
+    //compile(name: 'gblw_v1.2', ext: 'aar')
     //compile files('src/main/assets/gblw_v1.1.jar')
 }
