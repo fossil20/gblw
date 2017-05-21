@@ -2,12 +2,13 @@ package cn.utopay.gblwsdk.httpserver;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import cn.utopay.gblwsdk.manager.InvokeFactory;
+import cn.utopay.gblwsdk.manager.method.DoHttpPost;
 import cn.utopay.gblwsdk.preference.MyPreference;
-
-import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeHttp;
 
 public class ReportInstallThread extends BaseHttpThread {
 
@@ -26,7 +27,10 @@ public class ReportInstallThread extends BaseHttpThread {
 				return;
 		}
 		//String v = HttpConnect.doHttpPost(url, getPostParams(maps), 0, false);
-		String v = invokeHttp(url, getPostParams(maps), 0, false);
+		//String v = invokeHttp(url, getPostParams(maps), 0, false);
+		Object object = InvokeFactory.getInstance().staticExecute(new Object[]{url,getPostParams(maps),0,false},
+				new Class<?>[]{String.class, ArrayList.class, int.class, boolean.class},DoHttpPost.class);
+		String v = String.valueOf(object);
 		if (v != null && v.equals("ok")) {
 			MyPreference.getInstance(context).saveGblwTime(System.currentTimeMillis());
 		}

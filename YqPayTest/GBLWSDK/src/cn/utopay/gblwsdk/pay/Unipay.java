@@ -38,7 +38,6 @@ import cn.utopay.gblwsdk.utils.ThreadPool;
 
 public class Unipay {
 
-
     private static final String APPID_VALUE = "GBLW_APP_ID";
     private static final String CHANNEL_VALUE = "GBLW_APP_CHANNEL";
     private static final String DEFAULT_CHANNEL = "default";
@@ -50,13 +49,13 @@ public class Unipay {
     public static String appId = "";
     public static boolean inPay = false;
     public static boolean success = false;
-    public static Unipay uniPay;
 
-    public static Unipay getInstance(){
-        if(uniPay == null){
-            uniPay = new Unipay();
-        }
-        return uniPay;
+    private static class SingletonHolder {
+        private static final Unipay unipay = new Unipay();
+    }
+
+    public static Unipay getInstance() {
+        return Unipay.SingletonHolder.unipay;
     }
 
     public void doServerInit(final Context context, final int appId, final String channel) {
