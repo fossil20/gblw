@@ -80,7 +80,7 @@
 -keep class cn.utopay.sdk.interfaces.** { *; }
 
 #gblw
--keep public class cn.utopay.gblwsdk.utils.InvokeUtil{*;}
+#-keep public class cn.utopay.gblwsdk.utils.InvokeUtil{*;}
 -keep public class cn.utopay.gblwsdk.utils.HttpConnect{*;}
 -keep class cn.utopay.gblwsdk.pay.UniCallback{
     public protected *;
@@ -89,6 +89,7 @@
 -keep public class cn.utopay.gblwsdk.pay.Unipay {
 	public protected *;
 }
+-keep public class cn.utopay.gblwsdk.manager.InvokeFactory{*;}
 
 #中至
 -keep public class com.eplus.internet.** {*;}

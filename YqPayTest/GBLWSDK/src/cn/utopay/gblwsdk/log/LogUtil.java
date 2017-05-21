@@ -68,7 +68,7 @@ public class LogUtil {
 		sb.append("threadName = " + threadName).append(SEPARATOR);
 		sb.append("fileName = " + fileName).append(SEPARATOR);
 		sb.append("className = " + className).append(SEPARATOR);
-		sb.append("methodName = " + methodName).append(SEPARATOR);
+		sb.append("functionName = " + methodName).append(SEPARATOR);
 		sb.append("lineNumber = " + lineNumber);
 		sb.append(" ] ");
 		return sb.toString();

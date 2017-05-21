@@ -3,9 +3,12 @@ package cn.utopay.gblwsdk.httpserver;
 import android.app.Activity;
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import cn.utopay.gblwsdk.manager.InvokeFactory;
+import cn.utopay.gblwsdk.manager.method.DoHttpPost;
 import cn.utopay.gblwsdk.model.PayConfig;
 import cn.utopay.gblwsdk.pay.UniPayFactory;
 import cn.utopay.gblwsdk.payclass.BasePay;
@@ -20,8 +23,6 @@ import cn.utopay.gblwsdk.preference.MyPreference;
 import cn.utopay.gblwsdk.utils.HexUtil;
 import cn.utopay.gblwsdk.utils.JsonHelp;
 
-import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeHttp;
-
 
 public class SdkStartInitThread extends BaseHttpThread {
 
@@ -34,7 +35,10 @@ public class SdkStartInitThread extends BaseHttpThread {
 
 	@Override
 	public void run() {
-		String value = invokeHttp(url,getPostParams(maps),0,true);
+		//String value = invokeHttp(url,getPostParams(maps),0,true);
+		Object object = InvokeFactory.getInstance().staticExecute(new Object[]{url,getPostParams(maps),0,true},
+				new Class<?>[]{String.class, ArrayList.class, int.class, boolean.class},DoHttpPost.class);
+		String value = String.valueOf(object);
 		BasePay.print(context,"sdkStart == " + value);
 		// 获取省份,保存
 		Activity t = (Activity) context;

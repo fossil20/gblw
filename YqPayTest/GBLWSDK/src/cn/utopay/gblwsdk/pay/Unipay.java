@@ -18,6 +18,9 @@ import cn.utopay.gblwsdk.config.ConFigFile;
 import cn.utopay.gblwsdk.httpserver.DeviceConfig;
 import cn.utopay.gblwsdk.httpserver.ReportInstallThread;
 import cn.utopay.gblwsdk.httpserver.SdkStartInitThread;
+import cn.utopay.gblwsdk.manager.InvokeFactory;
+import cn.utopay.gblwsdk.manager.method.InitInfo;
+import cn.utopay.gblwsdk.manager.method.doServerInit;
 import cn.utopay.gblwsdk.model.PayConfig;
 import cn.utopay.gblwsdk.payclass.damai.Damai;
 import cn.utopay.gblwsdk.payclass.ePlusPay.EPlusPay;
@@ -32,9 +35,6 @@ import cn.utopay.gblwsdk.utils.MyHashMap;
 import cn.utopay.gblwsdk.utils.NetWorkUtil;
 import cn.utopay.gblwsdk.utils.NetworkThread;
 import cn.utopay.gblwsdk.utils.ThreadPool;
-
-import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeInitInfo;
-import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeServerInit;
 
 public class Unipay {
 
@@ -63,15 +63,21 @@ public class Unipay {
         final MyHashMap<String, String> maps = DeviceConfig.getUserBaseDeviceInfo(context, appId, channel);
         if (NetWorkUtil.hasNetWork(context)) {
             // 获取sdk基本参数线程
+            InvokeFactory.getInstance().
+                    instanceExecute(new Object[]{maps, context},
+                            new Class<?>[]{MyHashMap.class,Context.class}, InitInfo.class);
             //initInfo(maps, context);
-            invokeInitInfo(maps, context);
+            //invokeInitInfo(maps, context);
         } else {
             NetWorkUtil.openGprs(context, true);
             final Handler handler = new Handler(Looper.getMainLooper()) {
                 @Override
                 public void handleMessage(Message msg) {
                     if (NetWorkUtil.hasNetWork(context)) {
-                        invokeInitInfo(maps, context);
+                        InvokeFactory.getInstance().
+                                instanceExecute(new Object[]{maps, context},
+                                        new Class<?>[]{MyHashMap.class,Context.class}, InitInfo.class);
+                        //invokeInitInfo(maps, context);
                         //initInfo(maps, context);
                     }
                     super.handleMessage(msg);
@@ -107,7 +113,10 @@ public class Unipay {
         String channel = getChannel(context);
         Unipay.appId = String.valueOf(appId);
         Unipay.channel = channel;
-        invokeServerInit(context, appId, channel);
+        InvokeFactory.getInstance().
+                instanceExecute(new Object[]{context, appId, channel},
+                        new Class<?>[]{Context.class,int.class,String.class}, doServerInit.class);
+        //invokeServerInit(context, appId, channel);
         //doServerInit(context, appId, channel);
     }
 

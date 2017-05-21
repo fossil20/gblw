@@ -79,4 +79,4 @@
 
 -keep public class com.fossil.lwlibrary.utils.JarUtil{*;}
 
--keep class com.fossil.lwlibrary.method.** { *; }
+-keep class com.fossil.lwlibrary.function.** { *; }
