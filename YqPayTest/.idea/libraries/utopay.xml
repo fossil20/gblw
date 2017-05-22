@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="utopay">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/GBLWSDK/libs/utopay.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

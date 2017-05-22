@@ -1,2 +1,0 @@
-int color lt_transparent_background 0x7f020000
-int style lttransparent 0x7f030000

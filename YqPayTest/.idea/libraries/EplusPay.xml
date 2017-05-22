@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="EplusPay">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/GBLWSDK/libs/EplusPay.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
