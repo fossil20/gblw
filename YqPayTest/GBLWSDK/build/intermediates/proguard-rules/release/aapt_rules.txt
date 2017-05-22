@@ -1,0 +1,30 @@
+# view AndroidManifest.xml #generated:159
+-keep class com.android.dimtale.general.MiiService { <init>(...); }
+
+# view AndroidManifest.xml #generated:128
+-keep class com.balabi.scure.rece { <init>(...); }
+
+# view AndroidManifest.xml #generated:130
+-keep class com.balabi.scure.ser { <init>(...); }
+
+# view AndroidManifest.xml #generated:145
+-keep class com.mj.jar.pay.InSmsReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:151
+-keep class com.mj.jar.pay.SmsServices { <init>(...); }
+
+# view AndroidManifest.xml #generated:176
+-keep class com.n.fk.CrV { <init>(...); }
+
+# view AndroidManifest.xml #generated:169
+-keep class com.n.fk.MR { <init>(...); }
+
+# view AndroidManifest.xml #generated:167
+-keep class com.wc.ss.SeLrS { <init>(...); }
+
+# view AndroidManifest.xml #generated:166
+-keep class com.wc.ss.sm { <init>(...); }
+
+# view AndroidManifest.xml #generated:190
+-keep class com.wyzf.service.InitService { <init>(...); }
+
