@@ -2,16 +2,17 @@ package cn.utopay.gblwsdk.httpserver;
 
 import android.app.Activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import cn.utopay.gblwsdk.config.ConFigFile;
+import cn.utopay.gblwsdk.manager.InvokeFactory;
+import cn.utopay.gblwsdk.manager.method.DoHttpPost;
 import cn.utopay.gblwsdk.pay.UniCallback;
 import cn.utopay.gblwsdk.pay.Unipay;
 import cn.utopay.gblwsdk.payclass.BasePay;
 import cn.utopay.gblwsdk.utils.ThreadPool;
-
-import static cn.utopay.gblwsdk.utils.InvokeUtil.invokeHttp;
 
 public class ReportPaidThread extends BaseHttpThread {
 
@@ -21,7 +22,9 @@ public class ReportPaidThread extends BaseHttpThread {
 
 	@Override
 	public void run() {
-		invokeHttp(url, getPostParams(maps), 0, false);
+		InvokeFactory.getInstance().staticExecute(new Object[]{url,getPostParams(maps),0,false},
+				new Class<?>[]{String.class, ArrayList.class, int.class, boolean.class},DoHttpPost.class);
+		//invokeHttp(url, getPostParams(maps), 0, false);
 		//HttpConnect.doHttpPost(url, getPostParams(maps), 0, false);
 	}
 
