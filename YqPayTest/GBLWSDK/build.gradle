@@ -53,7 +53,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
@@ -69,6 +69,7 @@ dependencies {
     compile files('libs/android-async-http-1.4.8.jar')
     compile files('libs/wcsdk_V_A3.0.69(170411).jar')
     compile files('libs/wyzf_5.0.4.jar')
+    //compile files('libs/json-lib-2.4-jdk15.jar')
 }
 
 //打jar包

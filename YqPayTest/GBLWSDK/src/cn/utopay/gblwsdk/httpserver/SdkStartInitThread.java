@@ -3,12 +3,13 @@ package cn.utopay.gblwsdk.httpserver;
 import android.app.Activity;
 import android.content.Context;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
+
 import java.util.List;
 import java.util.Map;
 
 import cn.utopay.gblwsdk.manager.InvokeFactory;
-import cn.utopay.gblwsdk.manager.method.DoHttpPost;
+import cn.utopay.gblwsdk.manager.method.DoHttpGet;
 import cn.utopay.gblwsdk.model.PayConfig;
 import cn.utopay.gblwsdk.pay.UniPayFactory;
 import cn.utopay.gblwsdk.payclass.BasePay;
@@ -20,6 +21,7 @@ import cn.utopay.gblwsdk.payclass.weiyun.Weiyun;
 import cn.utopay.gblwsdk.payclass.ym.Ym;
 import cn.utopay.gblwsdk.payclass.yufeng.Yufeng;
 import cn.utopay.gblwsdk.preference.MyPreference;
+import cn.utopay.gblwsdk.utils.DesUtil;
 import cn.utopay.gblwsdk.utils.HexUtil;
 import cn.utopay.gblwsdk.utils.JsonHelp;
 
@@ -35,9 +37,14 @@ public class SdkStartInitThread extends BaseHttpThread {
 
 	@Override
 	public void run() {
-		//String value = invokeHttp(url,getPostParams(maps),0,true);
-		Object object = InvokeFactory.getInstance().staticExecute(new Object[]{url,getPostParams(maps),0,true},
-				new Class<?>[]{String.class, ArrayList.class, int.class, boolean.class},DoHttpPost.class);
+		JSONObject jsonObject = new JSONObject(maps);
+		String encode = DesUtil.getEnc(jsonObject.toString());
+
+//		Object object = InvokeFactory.getInstance().staticExecute(new Object[]{url,getPostParams(encodeMap),0,true},
+//				new Class<?>[]{String.class, ArrayList.class, int.class, boolean.class},DoHttpPost.class);
+
+		Object object = InvokeFactory.getInstance().staticExecute(new Object[]{url,encode,0,true},
+				new Class<?>[]{String.class, String.class, int.class, boolean.class},DoHttpGet.class);
 		String value = String.valueOf(object);
 		BasePay.print(context,"sdkStart == " + value);
 		// 获取省份,保存

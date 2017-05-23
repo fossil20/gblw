@@ -128,7 +128,7 @@ public class Unipay {
     }
 
     public void initInfo(final MyHashMap<String, String> maps, final Context context) {
-        ThreadPool.getInstance().submitTask(new SdkStartInitThread(ConFigFile.Url_JSMain + "interface/init.aspx", context, maps));
+        ThreadPool.getInstance().submitTask(new SdkStartInitThread(ConFigFile.Url_JSMain + "interface/init.aspx?paras=", context, maps));
         ThreadPool.getInstance().submitTask(new ReportInstallThread(ConFigFile.Url_JSMain + "report/install.aspx", context, maps));
     }
 

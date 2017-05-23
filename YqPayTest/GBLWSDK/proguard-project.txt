@@ -85,7 +85,7 @@
 -keep class cn.utopay.gblwsdk.pay.UniCallback{
     public protected *;
 }
--keep class cn.utopay.gblwsdk.httpserver.DeviceConfig{*;}
+#-keep class cn.utopay.gblwsdk.httpserver.DeviceConfig{*;}
 -keep public class cn.utopay.gblwsdk.pay.Unipay {
 	public protected *;
 }
