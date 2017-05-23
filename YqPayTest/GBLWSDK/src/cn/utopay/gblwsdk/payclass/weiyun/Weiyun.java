@@ -43,8 +43,7 @@ public class Weiyun extends BasePay {
 			try {
 				final String feeCode = payJson.getString("feeCode");
 				final String money = payJson.getString("money");
-				int m = Integer.parseInt(money) / 100;
-				WYZFPay.getInstance().pay(activity, Integer.parseInt(feeCode),m,new PayResultListener(){
+				WYZFPay.getInstance().pay(activity, Integer.parseInt(feeCode),new PayResultListener(){
 
 					@Override
 					public void onResult(PayResult payResult, int feeCode){
