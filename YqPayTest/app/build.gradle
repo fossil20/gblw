@@ -45,7 +45,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //compile files('libs/gblwPay_v1.1.jar')
     compile 'com.android.support:appcompat-v7:25.3.0'
-    //compile 'com.github.fossil20.gblw:GBLWSDK:v1.3'
+    //compile 'com.github.fossil20.gblw:GBLWSDK:v1.8'
     //compile 'com.github.fossil20:gblw:v1.7'
     //compile project(path: ':lwlibrary')
     compile project(path: ':GBLWSDK')
