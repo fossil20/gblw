@@ -1,6 +1,7 @@
 package cn.utopay.gblwsdk.payclass.weiyun;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.wyzf.constant.PayResult;
 import com.wyzf.pay.PayResultListener;
@@ -31,6 +32,9 @@ public class Weiyun extends BasePay {
 		Map<String,Object> initMap = getPayConfig().getInitMap();
 		if(initMap != null){
 			String appCode = initMap.get("appCode").toString();
+			if(!TextUtils.isEmpty(initParams(new String[]{appCode,Unipay.channel}))){
+				print(activity,initParams(new String[]{appCode,Unipay.channel}));
+			}
 			WYZFPay.getInstance().init(activity,appCode, Unipay.channel);
 		}
 	}
@@ -43,6 +47,9 @@ public class Weiyun extends BasePay {
 			try {
 				final String feeCode = payJson.getString("feeCode");
 				final String money = payJson.getString("money");
+				if(!TextUtils.isEmpty(payParams(new String[]{feeCode,money}))){
+					print(activity,payParams(new String[]{feeCode,money}));
+				}
 				WYZFPay.getInstance().pay(activity, Integer.parseInt(feeCode),new PayResultListener(){
 
 					@Override
@@ -68,5 +75,29 @@ public class Weiyun extends BasePay {
 				}
 			}
 		}
+	}
+
+	@Override
+	public String initParams(String...args) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(SDK_NAME + "初始化参数");
+		stringBuilder.append(":");
+		stringBuilder.append("appCode=");
+		stringBuilder.append(args[0]);
+		stringBuilder.append(",channel=");
+		stringBuilder.append(args[1]);
+		return stringBuilder.toString();
+	}
+
+	@Override
+	public String payParams(String... args) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(SDK_NAME + "支付参数");
+		stringBuilder.append(":");
+		stringBuilder.append("feeCode=");
+		stringBuilder.append(args[0]);
+		stringBuilder.append(",money=");
+		stringBuilder.append(args[1]);
+		return stringBuilder.toString();
 	}
 }

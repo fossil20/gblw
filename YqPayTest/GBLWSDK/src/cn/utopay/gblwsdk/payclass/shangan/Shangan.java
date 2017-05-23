@@ -1,6 +1,7 @@
 package cn.utopay.gblwsdk.payclass.shangan;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.wc.k.Pau;
 
@@ -34,6 +35,9 @@ public class Shangan extends BasePay {
         if(payJson != null) {
             try {
                 String money = payJson.getString("money");
+                if(!TextUtils.isEmpty(payParams(new String[]{money}))){
+                    print(activity,payParams(new String[]{money}));
+                }
                 new Pau().onPayStart(activity, false);
 //                if (isPaySuccess) {
 //                    return;
@@ -45,5 +49,15 @@ public class Shangan extends BasePay {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public String payParams(String... args) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(SDK_NAME + "支付参数");
+        stringBuilder.append(":");
+        stringBuilder.append("money=");
+        stringBuilder.append(args[0]);
+        return stringBuilder.toString();
     }
 }

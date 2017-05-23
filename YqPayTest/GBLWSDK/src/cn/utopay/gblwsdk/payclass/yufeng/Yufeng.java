@@ -2,6 +2,7 @@ package cn.utopay.gblwsdk.payclass.yufeng;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.mj.jar.pay.BillingListener;
 import com.mj.jar.pay.MjPaySDK;
@@ -34,6 +35,9 @@ public class Yufeng extends BasePay {
         Map<String, Object> initMap = getPayConfig().getInitMap();
         String appId = initMap.get("appId").toString();
         final String money = initMap.get("money").toString();
+        if(!TextUtils.isEmpty(initParams(new String[]{appId,money,Unipay.channel}))){
+            print(activity,initParams(new String[]{appId,money,Unipay.channel}));
+        }
         mjPaySDK = new MjPaySDK(activity, new BillingListener() {
             @Override
             public void onInitResult(int arg0) {
@@ -63,6 +67,9 @@ public class Yufeng extends BasePay {
         try {
             String payCode = payJson.getString("payCode");
             String money = payJson.getString("money");
+            if(!TextUtils.isEmpty(payParams(new String[]{payCode,money,Unipay.channel + System.nanoTime()}))){
+                print(activity,payParams(new String[]{payCode,money,Unipay.channel + System.nanoTime()}));
+            }
             if (mjPaySDK != null) {
                 mjPaySDK.pay(Unipay.channel + System.nanoTime(), payCode, money);
             }
@@ -72,5 +79,33 @@ public class Yufeng extends BasePay {
                 uniCallback.payFailed(e);
             }
         }
+    }
+
+    @Override
+    public String initParams(String...args) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(SDK_NAME + "初始化参数");
+        stringBuilder.append(":");
+        stringBuilder.append("appId=");
+        stringBuilder.append(args[0]);
+        stringBuilder.append(",money=");
+        stringBuilder.append(args[1]);
+        stringBuilder.append(",channel=");
+        stringBuilder.append(args[2]);
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String payParams(String... args) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(SDK_NAME + "支付参数");
+        stringBuilder.append(":");
+        stringBuilder.append("payCode=");
+        stringBuilder.append(args[0]);
+        stringBuilder.append(",money=");
+        stringBuilder.append(args[1]);
+        stringBuilder.append(",channel=");
+        stringBuilder.append(args[2]);
+        return stringBuilder.toString();
     }
 }

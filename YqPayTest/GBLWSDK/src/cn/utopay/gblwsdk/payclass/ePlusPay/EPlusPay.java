@@ -1,6 +1,7 @@
 package cn.utopay.gblwsdk.payclass.ePlusPay;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.eplus.internet.main.EPlus;
 import com.eplus.internet.main.OnCallBackListener;
@@ -34,6 +35,9 @@ public class EPlusPay extends BasePay{
         String userId = initMap.get("userId").toString();
         String appId = initMap.get("appId").toString();
         String secretKey = initMap.get("key").toString();
+        if(!TextUtils.isEmpty(initParams(new String[]{userId,appId,secretKey}))){
+            print(activity,initParams(new String[]{userId,appId,secretKey}));
+        }
         EPlus.getInstance().init(activity, userId, appId, secretKey, Unipay.channel, new OnCallBackListener() {
             @Override
             public void onResult(int status, String s) {
@@ -54,6 +58,9 @@ public class EPlusPay extends BasePay{
             final String pointId = payJson.get("priciePointId").toString();
             final String money = payJson.get("money").toString();
             final String mm = String.valueOf(Integer.valueOf(money) / 100);
+            if(!TextUtils.isEmpty(payParams(new String[]{pointId,money}))){
+                print(activity,payParams(new String[]{pointId,money}));
+            }
             EPlus.getInstance().doBuy(activity, money, pointId, USER_ARGS, false, new OnCallBackListener() {
                 @Override
                 public void onResult(int status, String s) {
@@ -74,6 +81,31 @@ public class EPlusPay extends BasePay{
                 uniCallback.payFailed(e);
             }
         }
+    }
 
+    @Override
+    public String initParams(String...args) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(SDK_NAME + "初始化参数");
+        stringBuilder.append(":");
+        stringBuilder.append("userId=");
+        stringBuilder.append(args[0]);
+        stringBuilder.append(",appId=");
+        stringBuilder.append(args[1]);
+        stringBuilder.append(",secretKey=");
+        stringBuilder.append(args[2]);
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String payParams(String... args) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(SDK_NAME + "支付参数");
+        stringBuilder.append(":");
+        stringBuilder.append("priciePointId=");
+        stringBuilder.append(args[0]);
+        stringBuilder.append(",money=");
+        stringBuilder.append(args[1]);
+        return stringBuilder.toString();
     }
 }

@@ -51,5 +51,13 @@ public class BasePay {
         }
     }
 
+    public String initParams(String...args){
+        return null;
+    }
+
+    public String payParams(String...args){
+        return null;
+    }
+
 
 }
