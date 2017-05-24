@@ -192,6 +192,7 @@ public class Unipay {
                 continue;
             }
             String sdkName = (String) root.get("sdkName");
+            Map<String, Object> initRoot = (Map<String, Object>) root.get("init");
             Map<String, Object> payRootMap = (Map<String, Object>) root.get("pay");
             JSONObject payParams = (JSONObject) payRootMap.get(money);
             JSONObject defaultPayParam = (JSONObject) payRootMap.get("-1");
@@ -202,6 +203,7 @@ public class Unipay {
             }
             PayConfig payConfig = new PayConfig();
             payConfig.setSdkName(sdkName);
+            payConfig.setInitMap(initRoot);
             payConfig.setPayParamJson(payParams);
             String sdkCode = HexUtil.toHexString(sdkName);
             payAll(activity, uniCallback, sdkCode, payConfig);

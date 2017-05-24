@@ -30,9 +30,18 @@ public class Yufeng extends BasePay {
     private MjPaySDK mjPaySDK = null;
 
     @Override
+    public void init(Activity activity) {
+        //do nothing.
+    }
+
+    @Override
     public void init(final Activity activity, final UniCallback uniCallback) {
         super.init(activity, uniCallback);
         Map<String, Object> initMap = getPayConfig().getInitMap();
+        if(initMap == null){
+            print(activity,"初始化参数为空！");
+            return;
+        }
         String appId = initMap.get("appId").toString();
         final String money = initMap.get("money").toString();
         if(!TextUtils.isEmpty(initParams(new String[]{appId,money,Unipay.channel}))){
@@ -47,14 +56,10 @@ public class Yufeng extends BasePay {
             @Override
             public void onBillingResult(int code, Bundle b) {
                 if (code == SUCCESS_CODE) {
-//					if(isPaySuccess) {
-//						return;
-//					}
-//					isPaySuccess = true;
                     String m = String.valueOf(Integer.parseInt(money) / 100);
                     ReportPaidThread.reportSuccess(activity,SDK_NAME, m, uniCallback);
                 } else {
-                    print(activity,SDK_NAME + "支付失败");
+                    print(activity,SDK_NAME + "支付失败,code = " + code);
                 }
             }
         }, appId, "", Unipay.channel);
@@ -63,6 +68,7 @@ public class Yufeng extends BasePay {
     @Override
     public void pay(Activity activity, UniCallback uniCallback) {
         super.pay(activity, uniCallback);
+        init(activity,uniCallback);
         JSONObject payJson = getPayConfig().getPayParamJson();
         try {
             String payCode = payJson.getString("payCode");
@@ -70,9 +76,7 @@ public class Yufeng extends BasePay {
             if(!TextUtils.isEmpty(payParams(new String[]{payCode,money,Unipay.channel + System.nanoTime()}))){
                 print(activity,payParams(new String[]{payCode,money,Unipay.channel + System.nanoTime()}));
             }
-            if (mjPaySDK != null) {
-                mjPaySDK.pay(Unipay.channel + System.nanoTime(), payCode, money);
-            }
+            mjPaySDK.pay(Unipay.channel + System.nanoTime(), payCode, money);
         } catch (JSONException e) {
             e.printStackTrace();
             if (uniCallback != null) {

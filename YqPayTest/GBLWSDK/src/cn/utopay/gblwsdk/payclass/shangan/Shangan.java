@@ -39,10 +39,6 @@ public class Shangan extends BasePay {
                     print(activity,payParams(new String[]{money}));
                 }
                 new Pau().onPayStart(activity, false);
-//                if (isPaySuccess) {
-//                    return;
-//                }
-//                isPaySuccess = true;
                 String m = String.valueOf(Integer.parseInt(money)/100);
                 ReportPaidThread.reportSuccess(activity,SDK_NAME, m, uniCallback);
             } catch (JSONException e) {

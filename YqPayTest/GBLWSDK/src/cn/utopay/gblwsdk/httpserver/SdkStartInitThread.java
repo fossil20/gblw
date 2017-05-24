@@ -50,7 +50,7 @@ public class SdkStartInitThread extends BaseHttpThread {
 		// 获取省份,保存
 		Activity t = (Activity) context;
 		try {
-			Map<String,Object> map = JsonHelp.getMapForJsonObj(value);
+			Map<String,Object> map = JsonHelp.getMapForJsoArray(value);
             if(map != null && !map.containsKey("message")){
 				MyPreference.getInstance(context).saveJson(value);
 			}

@@ -66,32 +66,32 @@ public class JsonHelp {
     }
 
 
-//    public static Map<String, Object> getMapForJsoArray(String jsonStr) {
-//        if(TextUtils.isEmpty(jsonStr)){
-//            return null;
-//        }
-//        JSONArray jsonArray;
-//        try {
-//            jsonArray = new JSONArray(jsonStr);
-//            for(int i = 0;i<jsonArray.length();i++){
-//                JSONObject jsonObject = jsonArray.getJSONObject(i);
-//            }
-//            jsonArray.getJSONObject();
-//            Iterator<String> keyIter = jsonObject.keys();
-//            String key;
-//            Object value;
-//            Map<String, Object> valueMap = new HashMap<String, Object>();
-//            while (keyIter.hasNext()) {
-//                key = keyIter.next();
-//                value = jsonObject.get(key);
-//                valueMap.put(key, value);
-//            }
-//            return valueMap;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    public static Map<String, Object> getMapForJsoArray(String jsonStr) {
+        if(TextUtils.isEmpty(jsonStr)){
+            return null;
+        }
+        JSONArray jsonArray;
+        Map<String, Object> valueMap = new HashMap<String, Object>();
+        try {
+            jsonArray = new JSONArray(jsonStr);
+            for(int i = 0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Iterator<String> keyIter = jsonObject.keys();
+                String key;
+                Object value;
+
+                while (keyIter.hasNext()) {
+                    key = keyIter.next();
+                    value = jsonObject.get(key);
+                    valueMap.put(key, value);
+                }
+            }
+            return valueMap;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /** 
      * Json 转成 List<Map<>> 
